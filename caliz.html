@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuadros Interactivos</title>
+    <link rel="stylesheet" href="css/caliz.css">
+</head>
+<body>
+    <!--Formulario Desplegable-->
+    <div class="buttons">
+        <!--<a href="weeklyRegister.php">-->
+            <button id="botonDesplegar" class="button boton">WEEKLY REGISTER</button>
+        <!--</a>-->
+    </div>
+    <div id="formularioDesplegable" class="formulario">
+        <form action="procesar_actualizacion.php" method="post" onsubmit="return calcularIMCyEnviar();">
+            <div class="btn">
+                <button type="submit">Upload</button>
+            </div>
+            <div class="btn">
+                <button type="submit">Upload</button>
+            </div>
+            <div class="btn">
+                <button type="submit">Upload</button>
+            </div>
+            <div class="btn">
+                <button type="submit">Upload</button>
+            </div>
+        </form>
+    </div>
+    <!--SCRIPT para hacerlo desplegable-->
+    <script>
+        document.getElementById("botonDesplegar").addEventListener("click", function() {
+        var formulario = document.getElementById("formularioDesplegable");
+        if (formulario.classList.contains("mostrando")) {
+            formulario.classList.remove("mostrando"); // Ocultar el formulario
+        } else {
+            formulario.classList.add("mostrando"); // Mostrar el formulario
+        }
+        });
+
+        document.getElementById("botonEnviar").addEventListener("click", function() {
+        var formulario = document.getElementById("formularioDesplegable");
+        formulario.classList.remove("mostrando"); // Ocultar el formulario al enviar
+        });
+    </script>
+    </body>
+    </html>

@@ -1,0 +1,161 @@
+@import url('https://fonts.cdnfonts.com/css/gagalin');
+/*slogan   font-family: 'Gagalin', sans-serif;*/
+@import url('https://fonts.googleapis.com/css2?family=Bree+Serif&display=swap');
+/*titles   font-family: "Bree Serif", serif; font-weight: 100; 34px*/
+@import url('https://fonts.googleapis.com/css2?family=Questrial&display=swap');
+/*text     font-family: "Questrial", sans-serif; 24px*/
+
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgb(255,222,89);
+    background: linear-gradient(0deg, rgba(255,222,89,1) 0%, rgba(255,145,77,1) 100%);
+}
+
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    padding: 1rem 0;
+    z-index: 9999; /* Coloca el encabezado en la capa superior */
+}
+
+.header h1 {
+    font-family: "Bree Serif", serif; 
+    font-weight: 100;
+    font-size: 45px;
+    color: white;
+}
+
+.header hr {
+    border: 2px solid white;
+}
+.form-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 2rem;
+    z-index: 9999; /* Coloca el formulario en la capa superior */
+}
+.form-container h2{
+    font-family: "Bree Serif", serif; 
+    font-weight: 100;
+    font-size: 25px;
+    text-align: center;
+}
+form{
+    display: flex;
+    flex-direction: column;
+}
+
+.input {
+    width: 380px;
+    height: 30px;
+    text-align: center;
+    padding: 8px;
+    border-radius: 20px;
+    border: 1.5px solid lightgrey;
+    outline: none;
+    transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+    box-shadow: 0px 0px 20px -18px;
+    margin: 15px;
+    opacity: 75%;
+    font-family: "Questrial", sans-serif;
+    font-size: 20px;
+  }
+  
+  .input:hover {
+    border: 2px solid lightgrey;
+    box-shadow: 0px 0px 20px -17px;
+  }
+  
+  .input:active {
+    transform: scale(0.95);
+  }
+  
+  .input:focus {
+    border: 2px solid grey;
+  }
+
+  .btnNxt{
+    display: flex;
+    justify-content: center;
+    margin-top: 25px;
+  }
+  .PEC{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .PEC select {
+    width: 110px;
+    height: 40px;
+    text-align: center;
+    padding: 8px;
+    border-radius: 20px;
+    border: 1.5px solid lightgrey;
+    outline: none;
+    transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+    box-shadow: 0px 0px 20px -18px;
+    margin: 15px;
+    opacity: 75%;
+    font-family: "Questrial", sans-serif;
+    font-size: 20px;
+  }
+  
+  .PEC select:hover {
+    border: 2px solid lightgrey;
+    box-shadow: 0px 0px 20px -17px;
+  }
+  
+  .PEC select:active {
+    transform: scale(0.95);
+  }
+  
+  .PEC select:focus {
+    border: 2px solid grey;
+  }
+
+  .nextBtn{
+    border-radius: 50px;
+    text-align: center;
+    cursor: pointer;
+    border: 0;
+    background-color: #19B8BF;
+    font-size: 20px;
+    transition: all 0.5s ease;
+    font-family: "Bree Serif", serif;
+    color: white;
+    width: 130px;
+    padding: 13px;
+   }
+
+   .nextBtn:hover {
+    background-color: hsl(261deg 80% 48%);
+    color: hsl(0, 0%, 100%);
+    box-shadow: rgb(93 24 220) 0px 0px 13px 0px;
+  }
+
+.background-image-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none; /* Evita que la imagen interfiera con los elementos de la interfaz de usuario */
+}
+
+.background-image {
+    max-width: 100%;
+    max-height: 100%;
+}

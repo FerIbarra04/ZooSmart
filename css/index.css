@@ -1,0 +1,291 @@
+@import url('https://fonts.cdnfonts.com/css/gagalin');
+/*slogan font-family: 'Gagalin', sans-serif;*/
+@import url('https://fonts.googleapis.com/css2?family=Bree+Serif&display=swap');
+/*titles     font-family: "Bree Serif", serif; font-weight: 100;*/
+@import url('https://fonts.googleapis.com/css2?family=Questrial&display=swap');
+/*text     font-family: "Questrial", sans-serif; 24px*/
+
+*{
+    margin: 0%;
+}
+/***************************BLUE***************************/
+.Blue{
+    background-color: #19B8BF;
+}
+
+
+.header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    padding: 20px;
+}
+
+.header a{
+    font-size: 23px;
+    font-family: "Bree Serif", serif;
+    font-weight: 100;
+    font-style: normal;
+    margin: 20px;
+    cursor: pointer;
+}
+.login{
+    text-align: center;
+    border: 3px solid white;
+    border-radius: 50px;
+    width: 140px;
+}
+/*ventana modal*/
+
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+    transition: opacity 0.5s ease;
+    opacity: 0;
+}
+
+.modal {
+    display: none;
+    position: absolute;
+    /*Fondo del modal*/
+    /*background-color: white;*/
+    background-color: #19B8BF;
+    border: 4px solid #ccc;
+    border-radius: 60px;
+    padding: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    width: 250px;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    opacity: 0;
+    z-index: 2;
+    
+}
+
+.modal-content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.close {
+    position: absolute;
+    font-size: 25px;
+    font-weight: bold;
+    top: 0;
+    right: 30px;
+    font-size: 20px;
+    cursor: pointer;
+}
+.form-Login{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    margin: 13px;
+}
+/*Inputs de modal*/
+.group {
+    display: flex;
+    align-items: center;
+    position: relative;
+    margin-top: 15px;
+  }
+  
+  .input {
+    width: 200px;
+    height: 35px;
+    text-align: center;
+    border: 2px solid transparent;
+    border-radius: 40px;
+    background-color: #F7F9FA;
+    transition: .5s ease;
+  }
+  
+  .input::placeholder {
+    color: black;
+    font-family: "Bree Serif", serif;
+  }
+  
+  .input:focus, input:hover {
+    outline: none;
+    border-color: rgba(129, 140, 248);
+    background-color: #fff;
+    box-shadow: 0 0 0 5px rgb(19 140 248 / 30%);
+    opacity: 80%;
+  }
+
+   .loginBtn{
+    margin-top: 25px;
+    padding: 8px 38px; 
+    border-radius: 50px;
+    text-align: center;
+    cursor: pointer;
+    border: 0;
+    background-color: #F39219;
+    font-size: 18px;
+    transition: all 0.5s ease;
+    font-family: "Bree Serif", serif;
+    color: white;
+   }
+
+   .loginBtn:hover {
+    background-color: hsl(261deg 80% 48%);
+    color: hsl(0, 0%, 100%);
+    box-shadow: rgb(93 24 220) 0px 0px 13px 0px;
+  }
+/*******************************************************************/
+
+.BElements{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #19B8BF;
+}
+.Blue img{
+    width: 350px;
+}
+.slogan{
+    font-family: 'Gagalin', sans-serif;
+    text-align: center;
+    font-size: 60px;
+    color: white;
+    margin: 20px 290px  50px 290px;
+}
+.btn{
+    display: flex;
+    justify-content: flex-end;
+    align-content: flex-end;
+    padding: 0 80px 50px 0px;
+}
+.button {
+    padding: 11px 32px;
+    border-radius: 50px;
+    cursor: pointer;
+    border: 0;
+    background-color: #F39219;
+    font-size: 20px;
+    transition: all 0.5s ease;
+    font-family: "Bree Serif", serif;
+    color: white;
+  }
+  
+.button:hover {
+    background-color: hsl(16deg 97% 47%);
+    color: hsl(0, 0%, 100%);
+    box-shadow: rgb(235 65 3) 0px 0px 18px 0px;
+  }
+  
+.button:active {
+    background-color: hsl(16deg 97% 47%);
+    color: hsl(0, 0%, 100%);
+    box-shadow: rgb(235 65 3) 0px 0px 18px 0px;
+    transform: translateY(10px);
+    transition: 100ms;
+  }
+
+/***********Waves(blue and green***********/
+.wave-container-b {
+    position: relative;
+    height: 150px;
+    width: 100%;
+    overflow: hidden;
+    background: #19B8BF;
+}
+.wave-g {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 150px;
+}
+/***************************GREEN****************************/
+.green{
+    background-color: #84AE1B; /* Color de fondo de respaldo */
+}
+/***********Waves(green and orange***********/
+.wave-container-g {
+    position: relative;
+    height: 150px;
+    width: 100%;
+    overflow: hidden;
+    background: #84AE1B;
+}
+.wave-o {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 150px;
+}
+  
+/***************************GREEN****************************/
+.green{
+    background-color: #84AE1B; /* Color de fondo de respaldo */
+
+}
+/***************************ORANGE***************************/
+.orange{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #F39219;
+}
+.info{
+    text-align: center;
+    font-size: 34px;
+    font-family: "Bree Serif", serif;
+    font-weight: 100;
+}
+hr{
+    display: flex;
+    align-items: center;
+    border: none; /* Asegúrate de que no haya bordes predeterminados*/
+    border: 1px solid black; /* Ancho, estilo y color de la línea */
+    width: 200px;
+}
+.orange p {
+    font-size: 24px;
+    text-align: justify;
+    font-family: "Questrial", sans-serif;
+    margin: 30px 100px 20px 100px;
+}
+
+/***********Waves(orange and yellow***********/
+.wave-container-o {
+    position: relative;
+    height: 150px;
+    width: 100%;
+    overflow: hidden;
+    background: #F39219;
+}
+.wave-y {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 160px;
+}
+  
+/***************************YELLOW***************************/
+.yellow{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #FFCF27;
+}
+.yellow a{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 15px;
+}
+.yellow img{
+    height: 40px;
+    margin: 10px;
+}

@@ -1,0 +1,218 @@
+@import url('https://fonts.cdnfonts.com/css/gagalin');
+/*slogan   font-family: 'Gagalin', sans-serif;*/
+@import url('https://fonts.googleapis.com/css2?family=Bree+Serif&display=swap');
+/*titles   font-family: "Bree Serif", serif; font-weight: 100; 34px*/
+@import url('https://fonts.googleapis.com/css2?family=Questrial&display=swap');
+/*text     font-family: "Questrial", sans-serif; 24px*/
+
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgb(70,23,98);
+    background: linear-gradient(0deg, rgba(70,23,98,1) 0%, rgba(156,79,240,1) 74%);
+}
+
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    padding: 1rem 0;
+    z-index: 9999; /* Coloca el encabezado en la capa superior */
+}
+
+.header h1 {
+    font-family: "Bree Serif", serif; 
+    font-weight: 100;
+    font-size: 45px;
+    color: white;
+}
+
+.header hr {
+    border: 2px solid white;
+}
+
+.form-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 2rem;
+    z-index: 9999; 
+    max-width: 600px;
+    margin-top: 40px;
+}
+
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form-row {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 25%; /* Ajustar el ancho de los grupos de formulario */
+}
+
+.input {
+    width: 350px; /* Hacer que los inputs ocupen el ancho completo de su contenedor */
+    height: 30px;
+    text-align: center;
+    padding: 8px;
+    border-radius: 20px;
+    border: 1.5px solid lightgrey;
+    outline: none;
+    transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+    box-shadow: 0px 0px 20px -18px;
+    margin: 15px;
+    opacity: 75%;
+    font-family: "Questrial", sans-serif;
+    font-size: 20px;
+}
+
+.input:hover {
+    border: 2px solid lightgrey;
+    box-shadow: 0px 0px 20px -17px;
+}
+
+.input:active {
+    transform: scale(0.95);
+}
+
+.input:focus {
+    border: 2px solid grey;
+}
+  
+/*formulario desplegable*/
+.buttons {
+    display: flex;
+    margin-top: 25px;
+  }
+  
+  .buttons button {
+    display: inline-block;
+    padding: 10px;
+    width: 350px;
+    border-radius: 15px;
+    color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.75); /* Rojo con 50% de opacidad */
+    font-family: "Bree Serif", serif; 
+    font-size: 25px;
+    text-align: center;
+    border: none;
+  }
+  .addZone{
+    font-family: "Bree Serif", serif; 
+    font-size: 35px;
+    text-align: center;
+    color: white;
+    cursor: pointer;
+    margin-top: 15px;
+  }
+  
+    .formulario {
+      overflow: hidden; /* Ocultar el contenido que desborda */
+      max-height: 0; /* Altura máxima inicialmente 0 */
+      transition: max-height 0.8s ease; /* Transición de altura */
+      border-radius: 16px;
+      background-color: rgba(255, 255, 255, 0.75);
+      padding: 0 60px 0 60px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-evenly;
+    }
+  
+    .mostrando {
+      max-height: 300px; /* Altura máxima cuando se muestra */
+    }
+    
+    .reptil-opt,
+    .aquatic-opt,
+    .land-opt,
+    .bird-opt{
+        width: 250px;
+        height: 35px;
+        border-radius: 16px;
+        font-family: "Bree Serif", serif; 
+        font-size: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        margin: 15px;
+    }
+    .reptil-opt{
+        background: rgb(18,90,0);
+        background: linear-gradient(274deg, rgba(18,90,0,1) 0%, rgba(132,174,27,1) 74%);
+    }
+    .aquatic-opt{
+        background: rgb(0,85,130);
+        background: linear-gradient(0deg, rgba(0,85,130,1) 0%, rgba(25,184,191,1) 74%);    
+    }
+    .land-opt{
+        background: rgb(243,117,25);
+        background: linear-gradient(90deg, rgba(243,117,25,1) 0%, rgba(255,182,19,1) 74%);    
+    }
+    .bird-opt{
+        background: rgb(255,0,0);
+        background: linear-gradient(273deg, rgba(255,0,0,1) 0%, rgba(255,41,41,1) 40%, rgba(255,76,76,1) 74%);    
+    }
+  
+/*-----------------------------------------------------------------------------------*/  
+.btnNxt {
+    display: flex;
+    justify-content: center;
+    margin-top: 25px;
+}
+
+.nextBtn {
+    border-radius: 50px;
+    text-align: center;
+    cursor: pointer;
+    border: 0;
+    background-color: #19B8BF;
+    font-size: 20px;
+    transition: all 0.5s ease;
+    font-family: "Bree Serif", serif;
+    color: white;
+    width: 150px;
+    padding: 13px;
+}
+
+.nextBtn:hover {
+    background-color: hsl(261deg 80% 48%);
+    color: hsl(0, 0%, 100%);
+    box-shadow: rgb(93 24 220) 0px 0px 13px 0px;
+}
+
+.background-image-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none; /* Evita que la imagen interfiera con los elementos de la interfaz de usuario */
+}
+
+.background-image {
+    max-width: 100%;
+    max-height: 100%;
+}
