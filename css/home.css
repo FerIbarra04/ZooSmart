@@ -96,11 +96,14 @@ h1{
 .reptil {
   background: rgb(18, 90, 0);
   background: linear-gradient(262deg, rgba(18, 90, 0, 1) 0%, rgba(132, 174, 27, 1) 75%);
+  cursor: pointer;
 }
 
 .aquatic {
   background: rgb(0, 85, 130);
   background: linear-gradient(175deg, rgba(0, 85, 130, 1) 0%, rgba(25, 184, 191, 1) 100%);
+  cursor: pointer;
+
 }
 .reptil h1{
   font-family: "Bree Serif", serif;
@@ -146,6 +149,7 @@ h1{
 .land{
   background: rgb(243,117,25);
   background: linear-gradient(144deg, rgba(243,117,25,1) 0%, rgba(255,182,19,1) 100%);
+  cursor: pointer;
   height: 100%;
   width: 35%;
   display: flex;
@@ -173,6 +177,7 @@ h1{
 .bird{
   background: rgb(255,0,0);
   background: linear-gradient(262deg, rgba(255,0,0,1) 0%, rgba(255,76,76,1) 75%);
+  cursor: pointer;
   height: 60%;
   width: 100%;
   display: flex;
@@ -205,14 +210,20 @@ h1{
   font-size: 45px;
   text-align: center;
 }
+a{
+  text-decoration: none;
+}
 
 .reptil:hover {
-  box-shadow: 0 0 25px 10px rgba(18, 90, 0, 1);
+  box-shadow: 0 0 25px 10px rgba(18, 90, 0, 0.7); /* Reducir la opacidad para que la sombra no sea demasiado dominante */
+  z-index: 2; /* Asegurar que esté por encima de otros elementos */
 }
 
 .aquatic:hover {
-  box-shadow: 0 0 20px 10px rgba(0, 85, 130, 1);
+  box-shadow: 0 0 20px 10px rgba(0, 85, 130, 0.7);
+  z-index: 2;
 }
+
 /*
 .land:hover {
   box-shadow: 0 0 20px 10px rgba(243, 117, 25, 1);
