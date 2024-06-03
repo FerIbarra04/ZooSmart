@@ -19,6 +19,7 @@ header{
 .atras{
     height: 40px;
     margin-left: 30px;
+    cursor: pointer;
 }
 .title{
     font-family: "Bree Serif", serif;
