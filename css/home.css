@@ -55,7 +55,6 @@ button {
   letter-spacing: 2px;
   margin: 30px 75px 0 0;
   position: relative; 
-  z-index: 1; 
 }
 button:hover {
   background-color: #EB4103;
@@ -71,7 +70,6 @@ button:active {
 }
 h1{
   position: relative; /* Agrega esta propiedad */
-  z-index: 1; /* Asegura que el h1 esté por encima del pseudo-elemento */
   text-align: center;
   font-family: "Bree Serif", serif; 
   font-weight: 500;

@@ -1,49 +1,63 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cuadros Interactivos</title>
-    <link rel="stylesheet" href="css/caliz.css">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/home.css">
 </head>
 <body>
-    <!--Formulario Desplegable-->
-    <div class="buttons">
-        <!--<a href="weeklyRegister.php">-->
-            <button id="botonDesplegar" class="button boton">WEEKLY REGISTER</button>
-        <!--</a>-->
+    <div class="header">
+        <div class="head">
+            <img src="img/logoH.png" alt="Logo">
+            <a href="#">
+                <button>
+                    Profile
+                </button>
+            </a>
+        </div>
+        <h1>Welcome Fernanda Ibarra</h1>
     </div>
-    <div id="formularioDesplegable" class="formulario">
-        <form action="procesar_actualizacion.php" method="post" onsubmit="return calcularIMCyEnviar();">
-            <div class="btn">
-                <button type="submit">Upload</button>
-            </div>
-            <div class="btn">
-                <button type="submit">Upload</button>
-            </div>
-            <div class="btn">
-                <button type="submit">Upload</button>
-            </div>
-            <div class="btn">
-                <button type="submit">Upload</button>
-            </div>
-        </form>
-    </div>
-    <!--SCRIPT para hacerlo desplegable-->
-    <script>
-        document.getElementById("botonDesplegar").addEventListener("click", function() {
-        var formulario = document.getElementById("formularioDesplegable");
-        if (formulario.classList.contains("mostrando")) {
-            formulario.classList.remove("mostrando"); // Ocultar el formulario
-        } else {
-            formulario.classList.add("mostrando"); // Mostrar el formulario
-        }
-        });
 
-        document.getElementById("botonEnviar").addEventListener("click", function() {
-        var formulario = document.getElementById("formularioDesplegable");
-        formulario.classList.remove("mostrando"); // Ocultar el formulario al enviar
-        });
-    </script>
-    </body>
-    </html>
+    <div class="container">
+        <div class="half-square">
+            <div class="content reptil">
+                <h1>REPTILIS</h1>
+                <div class="imgReptil">
+                    <img src="img/REPTILIS.png" alt="Reptil">
+                </div>
+            </div>
+        </div>
+        <div class="half-square">
+            <div class="content aquatic">
+                <div class="imgAquatic">
+                    <img src="img/AQUATIC.png" alt="Aquatic">
+                </div>
+                <h1>AQUATIC</h1>
+            </div>
+        </div>
+    </div>
+
+    <div class="contenedor">
+        <div class="land">
+            <h1>LAND</h1>
+            <div class="imgLand">
+                <img src="img/LAND.png" alt="Land">
+            </div>
+        </div>
+        <div class="box">
+            <div class="bird">
+                <h1>BIRDS</h1>
+                <div class="imgBird">
+                    <img src="img/BIRDS.png" alt="Bird">
+                </div>
+            </div>
+            <a href="CEmp.html">
+                <div class="add">
+                    <h1>+CREATE EMPLOYEE</h1>
+                </div>
+            </a>
+        </div>
+    </div>
+</body>
+</html>
