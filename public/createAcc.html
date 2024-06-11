@@ -12,14 +12,40 @@
         <hr>
     </header>
     <main class="form-container">
-        <h2>Admin Information</h2>
         <!-- Formulario para crear cuenta -->
         <form id="adminForm">
-            <input class="input" name="name" type="text" placeholder="Name" required>
-            <input class="input" name="email" type="email" placeholder="Email" required>
-            <input class="input" name="password" type="password" placeholder="Password" required>
-            <button class="nextBtn" type="submit">NEXT</button>
+            <div class="part">
+                <h2>Admin Information</h2>
+                <input class="input" name="name" type="text" placeholder="Name" required>
+                <input class="input" name="email" type="email" placeholder="Email" required>
+                <input class="input" name="password" type="password" placeholder="Password" required>
+            </div>
+            <div class="v-line"></div>
+            <div class="part">
+                <h2>Zoo Information</h2>
+                <input class="input" name="name" type="text" placeholder="Name Zoo" required>
+                <div class="PEC">
+                    <select id="country" name="country" required>
+                        <option value="" disabled selected>Country</option>
+                        <!-- Opciones de país se cargarán aquí dinámicamente -->
+                    </select>
+                    <select id="state" name="state" required>
+                        <option value="" disabled selected>State</option>
+                        <!-- Opciones de estado se cargarán aquí dinámicamente -->
+                    </select>
+                    <select id="city" name="city" required>
+                        <option value="" disabled selected>City</option>
+                        <!-- Opciones de ciudad se cargarán aquí dinámicamente -->
+                    </select>
+                </div>
+            <input class="input" name="address" type="text" placeholder="Address (street number and location)" required>
+            </div>
         </form>
+
+        <div class="btnNxt">
+            <button class="nextBtn" type="submit">CREATE</button>
+        </div>
+        
     </main>
     <div class="background-image-container">
         <img src="img/fondo_CAcc.png" class="background-image">

@@ -35,24 +35,25 @@ body, html {
 
 .header hr {
     border: 2px solid white;
-}
+} 
 .form-container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
     position: fixed;
-    top: 50%;
+    top: 56%;
     left: 50%;
     transform: translate(-50%, -50%);
-    padding: 2rem;
     z-index: 9999; /* Coloca el formulario en la capa superior */
 }
 .form-container h2{
     font-family: "Bree Serif", serif; 
     font-weight: 100;
-    font-size: 25px;
+    font-size: 30px;
     text-align: center;
 }
 form{
     display: flex;
-    flex-direction: column;
 }
 
 .input {
@@ -83,11 +84,52 @@ form{
   .input:focus {
     border: 2px solid grey;
   }
+  .v-line{
+    border-left: solid #ffffff;
+    height: 350px;
+    left: 50%;
+    position: absolute;
+   }
+  .PEC{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .PEC select {
+    width: 110px;
+    height: 40px;
+    text-align: center;
+    padding: 8px;
+    border-radius: 20px;
+    border: 1.5px solid lightgrey;
+    outline: none;
+    transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+    box-shadow: 0px 0px 20px -18px;
+    margin: 15px;
+    opacity: 75%;
+    font-family: "Questrial", sans-serif;
+    font-size: 20px;
+  }
+  
+  .PEC select:hover {
+    border: 2px solid lightgrey;
+    box-shadow: 0px 0px 20px -17px;
+  }
+  
+  .PEC select:active {
+    transform: scale(0.95);
+  }
+  
+  .PEC select:focus {
+    border: 2px solid grey;
+  }
+
 
   .btnNxt{
     display: flex;
     justify-content: center;
-    margin-top: 25px;
+    align-items: center;
+    margin-top: 50px;
   }
   .nextBtn{
     border-radius: 50px;
