@@ -12,23 +12,41 @@
         <hr>
     </header>
     <main class="form-container">
-        <h2>Admin Information </h2>
-        <!--Formulario para crear cuenta-->
-        <form action="/submit" method="post">
-            <input class="input" name="text" type="text" placeholder="Name">
-            <input class="input" name="text" type="text" placeholder="Email">
-            <input class="input" name="text" type="text" placeholder="Password">
+        <h2>Admin Information</h2>
+        <!-- Formulario para crear cuenta -->
+        <form id="adminForm">
+            <input class="input" name="name" type="text" placeholder="Name" required>
+            <input class="input" name="email" type="email" placeholder="Email" required>
+            <input class="input" name="password" type="password" placeholder="Password" required>
+            <button class="nextBtn" type="submit">NEXT</button>
         </form>
-        <div class="btnNxt">
-            <a href="CrADos.html">
-                 <button class="nextBtn" type="submit">NEXT</button>
-             </a>
-         </div>
     </main>
     <div class="background-image-container">
         <img src="img/fondo_CAcc.png" class="background-image">
     </div>
+    <script>
+        document.getElementById('adminForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const data = {};
+            formData.forEach((value, key) => {
+                data[key] = value;
+            });
+
+            const response = await fetch('/api/admins/create-admin', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+
+            if (response.ok) {
+                window.location.href = 'CrADos.html';
+            } else {
+                alert('Error al crear la cuenta');
+            }
+        });
+    </script>
 </body>
-<!--Aqui no recurdo que se necesita para el formulario, lo genere con al azar por si le quieres cambiar o quitar algo,
-        lo unico que si dejes son las class, son las que utilizo para el css lo demas no afecta-->
 </html>

@@ -1,26 +1,23 @@
 const express = require('express');
-const Zoo = require('../models/Zoo');
 const router = express.Router();
+const Zoo = require('../models/Zoo');
+const Admin = require('../models/Admin');
 
-// Crear un nuevo zoo
-router.post('/', async (req, res) => {
-  try {
-    const zoo = new Zoo(req.body);
-    await zoo.save();
-    res.status(201).json(zoo);
-  } catch (error) {
-    res.status(400).json({ error: error.message });
-  }
-});
+// Ruta para crear un nuevo zoo y asociarlo a un admin
+router.post('/create-zoo', async (req, res) => {
+    try {
+        const { name, country, state, city, address, adminId } = req.body;
+        const newZoo = new Zoo({ nombre: name, ciudad: city, pais: country, direccion: address, especies: [] });
+        await newZoo.save();
+        
+        // Actualiza el nombre del zoo en el admin
+        await Admin.findByIdAndUpdate(adminId, { nombre_zoo: name });
 
-// Obtener todos los zoos
-router.get('/', async (req, res) => {
-  try {
-    const zoos = await Zoo.find();
-    res.json(zoos);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
+        res.status(201).json({ message: 'Zoo creado exitosamente', zooId: newZoo._id });
+    } catch (error) {
+        res.status(500).json({ message: 'Error al crear zoo', error });
+    }
 });
 
 module.exports = router;
+
