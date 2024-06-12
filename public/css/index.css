@@ -5,171 +5,163 @@
 @import url('https://fonts.googleapis.com/css2?family=Questrial&display=swap');
 /*text     font-family: "Questrial", sans-serif; 24px*/
 
-*{
-    margin: 0%;
-}
-/***************************BLUE***************************/
-.Blue{
-    background-color: #19B8BF;
-}
-
-
-.header{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    padding: 20px;
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
 }
 
-.header a{
-    font-size: 23px;
-    font-family: "Bree Serif", serif;
-    font-weight: 100;
-    font-style: normal;
-    margin: 20px;
-    cursor: pointer;
-}
-.login{
-    text-align: center;
-    border: 3px solid white;
-    border-radius: 50px;
-    width: 140px;
-}
-/*ventana modal*/
-
-.overlay {
-    display: none;
-    position: fixed;
+.background {
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 1;
-    transition: opacity 0.5s ease;
-    opacity: 0;
+    background-image: url('index.webp'); /* Ajusta la ruta de tu imagen */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.6; /* Ajusta la opacidad aquí */
+    z-index: -1; /* Coloca la imagen de fondo detrás del contenido */
 }
 
-.modal {
-    display: none;
-    position: absolute;
-    /*Fondo del modal*/
-    /*background-color: white;*/
-    background-color: #19B8BF;
-    border: 4px solid #ccc;
-    border-radius: 60px;
-    padding: 10px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-    width: 250px;
-    transition: opacity 0.5s ease, transform 0.5s ease;
-    opacity: 0;
-    z-index: 2;
-    
-}
-
-.modal-content {
-    position: relative;
+.header {
     display: flex;
-    flex-direction: column;
+    justify-content: space-evenly;
+    padding-top: 20px;
+    position: relative; /* Importante para el posicionamiento absoluto del formulario */
 }
 
-.close {
-    position: absolute;
+.header a {
     font-size: 25px;
-    font-weight: bold;
-    top: 0;
-    right: 30px;
-    font-size: 20px;
+    font-family: "Bree Serif", serif;
+    font-weight: 100;
+    font-style: normal;
+    margin: 25px;
     cursor: pointer;
 }
-.form-Login{
+
+.login {
+    text-align: center;
+    border: 3px solid white;
+    border-radius: 50px;
+    width: 170px;
+    position: relative; /* Importante para posicionar el formulario respecto al botón */
+}
+
+/* LOGIN DESPLEGABLE */
+.formulario {
+    overflow: hidden;
+    max-height: 0; /* Altura máxima inicialmente 0 */
+    transition: max-height 1s linear; /* Transición de altura */
+    width: 250px;
+    border-radius: 30px;
+    background-color: hsla(0, 0%, 0%, 0.6); /* Negro con 60% de transparencia */
+    text-align: center;
+    position: absolute; /* Posicionamiento absoluto */
+    top: 78%; /* Ajuste para posicionar debajo del botón LOGIN */
+    left: 50%; /* Centrar horizontalmente */
+    transform: translateX(-50%); /* Ajustar posición horizontal */
+}
+
+.mostrando {
+    max-height: 500px; /* Altura máxima cuando se muestra */
+}
+
+
+.form-group {
     display: flex;
     flex-direction: column;
     align-items: center;
-    align-content: center;
-    margin: 13px;
+    margin: 25px;
 }
-/*Inputs de modal*/
-.group {
+
+.input {
+    width: 200px;
+    height: 15px;
+    text-align: center;
+    padding: 8px;
+    border-radius: 20px;
+    border: 1.5px solid lightgrey;
+    outline: none;
+    transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+    box-shadow: 0px 0px 20px -18px;
+    opacity: 75%;
+    font-family: "Questrial", sans-serif;
+    font-size: 17px;
+}
+
+.input:hover {
+    border: 3px solid rgb(255, 255, 255);
+    box-shadow: 0px 0px 20px -17px;
+}
+
+.input:active {
+    transform: scale(0.95);
+}
+
+.formulario .btn {
     display: flex;
     align-items: center;
-    position: relative;
-    margin-top: 15px;
-  }
-  
-  .input {
-    width: 200px;
-    height: 35px;
-    text-align: center;
-    border: 2px solid transparent;
-    border-radius: 40px;
-    background-color: #F7F9FA;
-    transition: .5s ease;
-  }
-  
-  .input::placeholder {
-    color: black;
-    font-family: "Bree Serif", serif;
-  }
-  
-  .input:focus, input:hover {
-    outline: none;
-    border-color: rgba(129, 140, 248);
-    background-color: #fff;
-    box-shadow: 0 0 0 5px rgb(19 140 248 / 30%);
-    opacity: 80%;
-  }
+    justify-content: center;
+    margin-bottom: 20px;
+}
 
-   .loginBtn{
-    margin-top: 25px;
-    padding: 8px 38px; 
+.formulario button {
+    padding: 8px 30px;
     border-radius: 50px;
-    text-align: center;
     cursor: pointer;
     border: 0;
-    background-color: #F39219;
-    font-size: 18px;
+    background-color: #19B8BF;
+    font-size: 17px;
+    font-weight: 100;
     transition: all 0.5s ease;
     font-family: "Bree Serif", serif;
     color: white;
-   }
+}
 
-   .loginBtn:hover {
+.formulario button:hover {
     background-color: hsl(261deg 80% 48%);
     color: hsl(0, 0%, 100%);
     box-shadow: rgb(93 24 220) 0px 0px 13px 0px;
-  }
-/*******************************************************************/
+}
 
-.BElements{
+
+.text{
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #19B8BF;
 }
-.Blue img{
+.text img{
     width: 350px;
+    fill: #000;
+    filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.5));
 }
 .slogan{
     font-family: 'Gagalin', sans-serif;
     text-align: center;
     font-size: 60px;
     color: white;
-    margin: 20px 290px  50px 290px;
+    text-shadow: 8px 8px 11px rgba(0, 0, 0, 0.6); /* Sombra para el texto del encabezado */
+    margin: 10px 290px 130px 290px;
 }
 .btn{
     display: flex;
-    justify-content: flex-end;
-    align-content: flex-end;
-    padding: 0 80px 50px 0px;
+    align-items: center;
+    justify-content: center;
+
 }
 .button {
-    padding: 11px 32px;
+    padding: 8px 60px;
     border-radius: 50px;
     cursor: pointer;
     border: 0;
-    background-color: #F39219;
-    font-size: 20px;
+    background-color: #FFCF27;
+    font-size: 24px;
+    font-weight: 100;
+    letter-spacing: 1px;
     transition: all 0.5s ease;
     font-family: "Bree Serif", serif;
     color: white;
@@ -188,104 +180,74 @@
     transform: translateY(10px);
     transition: 100ms;
   }
-
-/***********Waves(blue and green***********/
-.wave-container-b {
-    position: relative;
-    height: 150px;
-    width: 100%;
-    overflow: hidden;
-    background: #19B8BF;
-}
-.wave-g {
+.LeopardoImg{
     position: absolute;
-    left: 0;
     bottom: 0;
-    width: 100%;
-    height: 150px;
+    left: 0;
+    width: 45%;
+    z-index: -1; /* Coloca la imagen de fondo detrás del contenido */   
 }
-/***************************GREEN****************************/
-.green{
-    background-color: #84AE1B; /* Color de fondo de respaldo */
-}
-/***********Waves(green and orange***********/
-.wave-container-g {
-    position: relative;
-    height: 150px;
-    width: 100%;
-    overflow: hidden;
-    background: #84AE1B;
-}
-.wave-o {
+.chamaleonImg{
     position: absolute;
-    left: 0;
     bottom: 0;
-    width: 100%;
-    height: 150px;
+    right: 0px;
+    width: 35%;
+    z-index: -1; /* Coloca la imagen de fondo detrás del contenido */   
 }
-  
-/***************************GREEN****************************/
-.green{
-    background-color: #84AE1B; /* Color de fondo de respaldo */
 
+
+
+/* POP UP DE ABOUT US... */
+
+.popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
 }
-/***************************ORANGE***************************/
-.orange{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: #F39219;
+
+.overlay {
+    background-color: rgba(0, 0, 0, 0.7);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 }
-.info{
-    text-align: center;
-    font-size: 34px;
-    font-family: "Bree Serif", serif;
-    font-weight: 100;
-}
-hr{
-    display: flex;
-    align-items: center;
-    border: none; /* Asegúrate de que no haya bordes predeterminados*/
-    border: 1px solid black; /* Ancho, estilo y color de la línea */
-    width: 200px;
-}
-.orange p {
-    font-size: 24px;
-    text-align: justify;
+
+.popup-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     font-family: "Questrial", sans-serif;
-    margin: 30px 100px 20px 100px;
+    font-weight: 200;
+    font-size: 26px;
+    text-align: center;
+    color: white;
+    width: 65%;
+}
+.close {
+    position: absolute;
+    top: -80px;
+    right: -10px;
+    font-size: 90px;
+    cursor: pointer;
+}
+.contact{
+    font-family: "Bree Serif", serif; 
+    font-weight: 100;
+    font-size: 30px;
+}
+.contain-us{
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-/***********Waves(orange and yellow***********/
-.wave-container-o {
-    position: relative;
-    height: 150px;
-    width: 100%;
-    overflow: hidden;
-    background: #F39219;
-}
-.wave-y {
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    height: 160px;
-}
-  
-/***************************YELLOW***************************/
-.yellow{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: #FFCF27;
-}
-.yellow a{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    margin: 15px;
-}
-.yellow img{
-    height: 40px;
-    margin: 10px;
-}
+
+
+

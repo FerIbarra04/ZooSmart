@@ -7,129 +7,97 @@
     <title>Document</title>
 </head>
 <body>  
-    <section class="Blue">    
-        <div class="header">  
-            <a>ABOUT US</a>
-            <a class="login" id="loginBtn">LOGIN</a>
-                <div id="overlay" class="overlay"></div>
-                <div id="modal" class="modal">
-                    <div class="modal-content">
-                        <span class="close">&times;</span>
-                        <form class="form-Login">
-                            <!--Email-->
-                            <div class="group">
-                                <input class="input" type="text" placeholder="Email">
-                            </div>
-                            <!--Password-->
-                            <div class="group">
-                                <input class="input" type="password" placeholder="Password">
-                            </div>
-                            <button class="loginBtn" type="submit">LogIn</button>
-                        </form>
-                    </div>
+    <div class="background">
+        
+    </div>
+    <div class="header">
+        <!--<a>ABOUT US</a>-->
+        <a class="menu-item" id="about">ABOUT US</a>
+        <a id="botonDesplegar" class="login">LOGIN</a>
+        <!--Formulario Desplegable-->
+        <div id="formularioDesplegable" class="formulario">
+            <form action="procesar_actualizacion.php" method="post">
+                <div class="form-group">
+                    <input class="input" placeholder="Email" required>
                 </div>
-                <script>
-                    document.addEventListener('DOMContentLoaded', (event) => {
-                        const loginBtn = document.getElementById('loginBtn');
-                        const modal = document.getElementById('modal');
-                        const overlay = document.getElementById('overlay');
-                        const closeBtn = document.querySelector('.close');
-
-                        const showModal = () => {
-                            const rect = loginBtn.getBoundingClientRect();
-                            modal.style.top = `${rect.bottom}px`;
-                            modal.style.left = `${rect.left}px`;
-
-                            overlay.style.display = 'block';
-                            modal.style.display = 'block';
-
-                            setTimeout(() => {
-                                overlay.style.opacity = '1';
-                                modal.style.opacity = '1';
-                                modal.style.transform = 'translateY(0)';
-                            }, 10); // Small delay to trigger the transition
-                        };
-
-                        const hideModal = () => {
-                            overlay.style.opacity = '0';
-                            modal.style.opacity = '0';
-                            modal.style.transform = 'translateY(-20px)';
-
-                            setTimeout(() => {
-                                overlay.style.display = 'none';
-                                modal.style.display = 'none';
-                            }, 500); // Duration of the transition
-                        };
-
-                        loginBtn.addEventListener('click', showModal);
-                        closeBtn.addEventListener('click', hideModal);
-
-                        window.addEventListener('click', (event) => {
-                            if (event.target === overlay || (event.target !== modal && event.target !== loginBtn && !modal.contains(event.target))) {
-                                hideModal();
-                            }
-                        });
-                    });
-                </script>
-            <a>CONTACT</a>
+                <div class="form-group">
+                    <input class="input" type="password" placeholder="Password" required>
+                </div>
+                <div class="btn">
+                    <button type="submit">Login</button>
+                </div>
+            </form>
         </div>
-        <div class="BElements">
-            <img src="img/logoH.png" alt="logo">
-            <p class="slogan">WHERE TECHNOLOGY PROTECTS WILDLIFE</p>
-        </div> 
-        <div class="btn">
-            <a href="createAcc.html">
-                <button class="button">Create an account</button>
-            </a>
-        </div>   
-        <div class="image-container">
-            <img src="img/imagenBlue.png" alt="Blue Section Image">
-        </div>
-    </section>
+        <script>
+            document.getElementById("botonDesplegar").addEventListener("click", function() {
+            var formulario = document.getElementById("formularioDesplegable");
+            if (formulario.classList.contains("mostrando")) {
+                formulario.classList.remove("mostrando"); // Ocultar el formulario
+            } else {
+                formulario.classList.add("mostrando"); // Mostrar el formulario
+            }
+            });
 
-    <div class="wave-container-b">
-        <svg class="wave-g" viewBox="0 0 500 150" preserveAspectRatio="none">
-          <path d="M-2.37,9.35 C201.35,-46.75 346.39,209.14 499.32,119.58 L500.00,149.60 L-0.00,149.60 Z" style="stroke: none; fill: #84AE1B;"></path>
-        </svg>
+            document.getElementById("botonEnviar").addEventListener("click", function() {
+            var formulario = document.getElementById("formularioDesplegable");
+            formulario.classList.remove("mostrando"); // Ocultar el formulario al enviar
+            });
+        </script>
+        <!------------------------------------------------------------>
+          <!-- Popup de About Us -->
+            <div id="aboutPopup" class="popup">
+                <div class="overlay"></div>
+                <div class="popup-content">
+                    <span class="close">&times;</span> <!-- Cruz de cierre -->
+                    <p>
+                        At ZooSmart, we are committed to innovation and excellence in zoo management. Our web platform and mobile app are designed to revolutionize the daily management of zoos, allowing owners and managers to focus on delivering the best possible experience to their visitors and animals.
+                    </p>
+                    <p>
+                        We believe that by integrating IoT technology into our tools, we can optimize animal care and zoo operations, creating a safer and more efficient environment. All our devices are designed to be monitored and controlled in real time through our platform. This allows managers to have precise and detailed control of every aspect of animal care and zoo operation.
+                    </p>
+                    <h1 class="contact">
+                        CONTACT
+                        <div class="contain-us">
+                            <a href="mailto:healthyhubb.official@gmail.com" target="_blank">
+                                ZooSmart@gmail.com
+                                <img>
+                            </a>
+                        </div>
+                    </h1>
+                </div>
+            </div>
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                document.getElementById('about').addEventListener('click', function() {
+                    document.getElementById('aboutPopup').style.display = 'block';
+                });
+
+                document.querySelector('.popup .overlay').addEventListener('click', function() {
+                    document.getElementById('aboutPopup').style.display = 'none';
+                });
+
+                document.querySelector('.popup .close').addEventListener('click', function() {
+                    document.getElementById('aboutPopup').style.display = 'none';
+                });
+            });
+
+
+            </script>
+            
+        <a>CONTACT</a>
     </div>
     
-    <section class="green">
-        <div class="image-container">
-            <img src="img/imagenGreen.png" alt="Green Section Image">
-        </div>
-    </section>
+            <div class="text">
+                <img src="img/logoH.png" alt="logo">
+                <p class="slogan">WHERE TECHNOLOGY PROTECTS WILDLIFE</p>
+            </div> 
 
-    <div class="wave-container-g">
-        <svg class="wave-o" viewBox="0 0 500 150" preserveAspectRatio="none">
-            <path d="M-3.16,80.21 C187.58,247.53 145.82,-128.43 503.05,142.21 L501.35,156.00 L-0.00,149.60 Z" style="stroke: none;  fill: #F39219;"></path>
-        </svg>
-    </div>
-
-    <section class="orange">
-        <h1 class="info">ABOUT US</h1>
-        <hr><hr>
-        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. A necessitatibus doloremque quae voluptate officiis voluptatem fuga asperiores mollitia ipsum natus assumenda numquam tenetur quis nihil inventore soluta ab, est sint.</p>
-        <div class="image-container">
-            <img src="img/imagenOrange.png" alt="Orange Section Image">
-        </div>
-    </section>
-
-    <div class="wave-container-o">
-        <svg class="wave-y" viewBox="0 0 1440 320" preserveAspectRatio="none">
-            <path d="M0,160L24,165.3C48,171,96,181,144,160C192,139,240,85,288,85.3C336,85,384,139,432,170.7C480,203,528,213,576,202.7C624,192,672,160,720,138.7C768,117,816,107,864,128C912,149,960,203,1008,224C1056,245,1104,235,1152,218.7C1200,203,1248,181,1296,165.3C1344,149,1392,139,1416,133.3L1440,128L1440,320L1416,320C1392,320,1344,320,1296,320C1248,320,1200,320,1152,320C1104,320,1056,320,1008,320C960,320,912,320,864,320C816,320,768,320,720,320C672,320,624,320,576,320C528,320,480,320,432,320C384,320,336,320,288,320C240,320,192,320,144,320C96,320,48,320,24,320L0,320Z" style="stroke: none; fill: #FFCF27;"></path>
-        </svg>
-    </div>
-
-    <section class="yellow">
-        <h1 class="info">CONTACT</h1>
-        <hr><hr>
-        <a href="mailto:zoosmart@gmail.com" target="_blank">
-            <img src="img/email.png">ZooSmart@gmail.com
-        </a>
-        <div class="image-container">
-            <img src="img/imagenYellow.png" alt="Yellow Section Image">
-        </div>
-    </section>
-
+            <div class="btn">
+                <a href="createAcc.html">
+                    <button class="button">Create an account</button>
+                </a>
+            </div> 
+            <img class="LeopardoImg" src="img/Leopardo.png">
+            <img class="chamaleonImg" src="img/chameleon.png">
 </body>
 </html>
