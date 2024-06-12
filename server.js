@@ -5,7 +5,7 @@ const path = require('path');
 const adminRoutes = require('./routes/adminRoutes');
 const animalRoutes = require('./routes/animalRoutes');
 const empleadoRoutes = require('./routes/empleadoRoutes');
-const zooRoutes = require('./routes/ZooRoutes');
+const zooRoutes = require('./routes/zooRoutes');
 
 const app = express();
 const port = 3000;
@@ -52,5 +52,6 @@ app.get('/api/test-db', async (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`Servidor escuchando en http://localhost:${port}`);
+  console.log(`Servidor funcionando en http://localhost:${port}`);
 });
+

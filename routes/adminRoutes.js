@@ -1,25 +1,23 @@
 const express = require('express');
-const Admin = require('../models/Admin');
 const router = express.Router();
+const Admin = require('../models/Admin');
 
-// Crear un nuevo admin
-router.post('/', async (req, res) => {
+router.post('/create-admin', async (req, res) => {
   try {
-    const admin = new Admin(req.body);
-    await admin.save();
-    res.status(201).json(admin);
-  } catch (error) {
-    res.status(400).json({ error: error.message });
-  }
-});
+    const lastAdmin = await Admin.findOne().sort({ id: -1 });
+    const newId = lastAdmin ? lastAdmin.id + 1 : 1;
 
-// Obtener todos los admins
-router.get('/', async (req, res) => {
-  try {
-    const admins = await Admin.find();
-    res.json(admins);
+    const newAdmin = new Admin({
+      id: newId,
+      nombre: req.body.name,
+      email: req.body.email,
+      contraseña: req.body.password
+    });
+
+    await newAdmin.save();
+    res.status(201).json({ message: 'Admin creado exitosamente' });
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    res.status(500).json({ message: 'Error al crear admin', error });
   }
 });
 
