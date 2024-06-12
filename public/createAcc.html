@@ -50,29 +50,5 @@
     <div class="background-image-container">
         <img src="img/fondo_CAcc.png" class="background-image">
     </div>
-    <script>
-        document.getElementById('adminForm').addEventListener('submit', async function(event) {
-            event.preventDefault();
-            const formData = new FormData(event.target);
-            const data = {};
-            formData.forEach((value, key) => {
-                data[key] = value;
-            });
-
-            const response = await fetch('/api/admins/create-admin', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            });
-
-            if (response.ok) {
-                window.location.href = 'CrADos.html';
-            } else {
-                alert('Error al crear la cuenta');
-            }
-        });
-    </script>
 </body>
 </html>
