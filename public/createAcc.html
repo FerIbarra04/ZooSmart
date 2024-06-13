@@ -25,18 +25,9 @@
                 <h2>Zoo Information</h2>
                 <input class="input" name="name" type="text" placeholder="Name Zoo" required>
                 <div class="PEC">
-                    <select id="country" name="country" required>
-                        <option value="" disabled selected>Country</option>
-                        <!-- Opciones de país se cargarán aquí dinámicamente -->
-                    </select>
-                    <select id="state" name="state" required>
-                        <option value="" disabled selected>State</option>
-                        <!-- Opciones de estado se cargarán aquí dinámicamente -->
-                    </select>
-                    <select id="city" name="city" required>
-                        <option value="" disabled selected>City</option>
-                        <!-- Opciones de ciudad se cargarán aquí dinámicamente -->
-                    </select>
+                    <input class="input-zoo" name="name" type="text" placeholder="Name" required>
+                    <input class="input-zoo" name="name" type="text" placeholder="Name" required>
+                    <input class="input-zoo" name="name" type="text" placeholder="Name" required>
                 </div>
             <input class="input" name="address" type="text" placeholder="Address (street number and location)" required>
             </div>
@@ -50,5 +41,29 @@
     <div class="background-image-container">
         <img src="img/fondo_CAcc.png" class="background-image">
     </div>
+    <script>
+        document.getElementById('adminForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const data = {};
+            formData.forEach((value, key) => {
+                data[key] = value;
+            });
+
+            const response = await fetch('/api/admins/create-admin', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+
+            if (response.ok) {
+                window.location.href = 'CrADos.html';
+            } else {
+                alert('Error al crear la cuenta');
+            }
+        });
+    </script>
 </body>
 </html>
