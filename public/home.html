@@ -10,14 +10,14 @@
     <div class="header">
         <div class="head">
             <img src="img/logoH.png">
-            <a >
+            <a>
                 <button>
                     Profile
                 </button>
             </a>
         </div>
-        <!--En mi nombre va la etiqueta que jalara el nombre-->
-        <h1>Welcome Fernanda Ibarra</h1>
+        <!--El nombre del usuario será insertado aquí por JavaScript-->
+        <h1 id="welcome-message">Welcome</h1>
     </div>
 
     <div class="container">
@@ -43,29 +43,47 @@
         </div>
     </div>
   
-
-  <div class="contenedor">
-    <div class="land">
-        <h1>LAND</h1>
-        <div class="imgLand">
-            <img src="img/LAND.png">
+    <div class="contenedor">
+        <div class="land">
+            <h1>LAND</h1>
+            <div class="imgLand">
+                <img src="img/LAND.png">
+            </div>
+        </div>
+        <div class="box">
+            <a href="birdZone.html">
+                <div class="bird">
+                    <h1>BIRDS</h1>
+                    <div class="imgBird">
+                        <img src="img/BIRDS.png">
+                    </div>
+                </div>
+            </a>
+            <a href="CEmp.html">
+                <div class="add">
+                    <h1>+CREATE EMPLOYEE</h1>
+                </div>
+            </a>
         </div>
     </div>
-    <div class="box">
-        <a href="birdZone.html">
-            <div class="bird">
-                <h1>BIRDS</h1>
-                <div class="imgBird">
-                    <img src="img/BIRDS.png">
-                </div>
-            </div>
-        </a>
-        <a href="CEmp.html">
-            <div class="add">
-                <h1>+CREATE EMPLOYEE</h1>
-            </div>
-        </a>
-    </div>
-  </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch('/api/user')
+                .then(response => {
+                    if (response.status === 401) {
+                        window.location.href = '/';
+                    } else {
+                        return response.json();
+                    }
+                })
+                .then(user => {
+                    document.getElementById('welcome-message').innerText = `Welcome ${user.name}`;
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        });
+    </script>
 </body>
 </html>
