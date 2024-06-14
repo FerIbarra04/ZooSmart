@@ -1,0 +1,116 @@
+@import url('https://fonts.cdnfonts.com/css/gagalin');
+/*slogan font-family: 'Gagalin', sans-serif;*/
+@import url('https://fonts.googleapis.com/css2?family=Bree+Serif&display=swap');
+/*titles     font-family: "Bree Serif", serif; font-weight: 100;*/
+@import url('https://fonts.googleapis.com/css2?family=Questrial&display=swap');
+/*text     font-family: "Questrial", sans-serif; 24px*/
+
+*{
+    margin: 0;
+    height: 100%;
+}
+header{
+    background-color: rgba(41, 164, 124, 0.5);
+    height: 14%;
+    display: flex;
+    align-items: center;
+}
+header img{
+    margin-left: 50px;
+    height: 50px;
+}
+.contain-title{
+    background-color: #5FBA9C;
+    height: 13%;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.title{
+    font-family: "Bree Serif", serif;
+    font-size: 38px;
+    color: white;
+    letter-spacing: 2px;
+}
+.third{
+    background-color: #4DBAA5;
+    height: 13%;
+}
+.form-container {
+    background: rgb(25,184,191);
+    background: linear-gradient(180deg, rgba(25,184,191,1) 11%, rgba(0,85,130,1) 49%);
+    height: 60%;
+}
+.formulario{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+.part{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.part .input {
+    width: 380px;
+    height: 30px;
+    text-align: center;
+    padding: 8px;
+    border-radius: 20px;
+    border: 1.5px solid lightgrey;
+    outline: none;
+    transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+    box-shadow: 0px 0px 20px -18px;
+    margin: 15px;
+    opacity: 75%;
+    font-family: "Questrial", sans-serif;
+    font-size: 20px;
+  }
+  
+  .part.input:hover {
+    border: 2px solid lightgrey;
+    box-shadow: 0px 0px 20px -17px;
+  }
+  
+  .part.input:active {
+    transform: scale(0.95);
+  }
+  
+  .part.input:focus {
+    border: 2px solid grey;
+  }
+  .btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 50px;
+}
+.button {
+    padding: 10px 30px;
+    border-radius: 50px;
+    cursor: pointer;
+    border: 0;
+    background-color: #FFCF27;
+    font-size: 20px;
+    font-weight: 100;
+    letter-spacing: 1px;
+    transition: all 0.5s ease;
+    font-family: "Bree Serif", serif;
+    color: white;
+  }
+  
+.button:hover {
+    background-color: hsl(16deg 97% 47%);
+    color: hsl(0, 0%, 100%);
+    box-shadow: rgb(235 65 3) 0px 0px 18px 0px;
+}
+  
+.button:active {
+    background-color: hsl(16deg 97% 47%);
+    color: hsl(0, 0%, 100%);
+    box-shadow: rgb(235 65 3) 0px 0px 18px 0px;
+    transform: translateY(10px);
+    transition: 100ms;
+  }
