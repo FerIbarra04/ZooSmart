@@ -7,21 +7,18 @@
     <title>Document</title>
 </head>
 <body>  
-    <div class="background">
-        
-    </div>
+    <div class="background"></div>
     <div class="header">
-        <!--<a>ABOUT US</a>-->
         <a class="menu-item" id="about">ABOUT US</a>
         <a id="botonDesplegar" class="login">LOGIN</a>
         <!--Formulario Desplegable-->
         <div id="formularioDesplegable" class="formulario">
-            <form action="procesar_actualizacion.php" method="post">
+            <form id="loginForm">
                 <div class="form-group">
-                    <input class="input" placeholder="Email" required>
+                    <input class="input" type="email" id="email" placeholder="Email" required>
                 </div>
                 <div class="form-group">
-                    <input class="input" type="password" placeholder="Password" required>
+                    <input class="input" type="password" id="password" placeholder="Password" required>
                 </div>
                 <div class="btn">
                     <button type="submit">Login</button>
@@ -30,44 +27,68 @@
         </div>
         <script>
             document.getElementById("botonDesplegar").addEventListener("click", function() {
-            var formulario = document.getElementById("formularioDesplegable");
-            if (formulario.classList.contains("mostrando")) {
-                formulario.classList.remove("mostrando"); // Ocultar el formulario
-            } else {
-                formulario.classList.add("mostrando"); // Mostrar el formulario
-            }
+                var formulario = document.getElementById("formularioDesplegable");
+                if (formulario.classList.contains("mostrando")) {
+                    formulario.classList.remove("mostrando"); // Ocultar el formulario
+                } else {
+                    formulario.classList.add("mostrando"); // Mostrar el formulario
+                }
             });
 
-            document.getElementById("botonEnviar").addEventListener("click", function() {
-            var formulario = document.getElementById("formularioDesplegable");
-            formulario.classList.remove("mostrando"); // Ocultar el formulario al enviar
+            document.getElementById("loginForm").addEventListener("submit", function(event) {
+                event.preventDefault();
+                var email = document.getElementById("email").value;
+                var password = document.getElementById("password").value;
+
+                fetch('/api/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ email: email, password: password })
+                })
+                .then(response => {
+                    if (response.redirected) {
+                        window.location.href = response.url;
+                    } else {
+                        return response.json();
+                    }
+                })
+                .then(data => {
+                    if (data && data.message) {
+                        alert(data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
             });
         </script>
         <!------------------------------------------------------------>
-          <!-- Popup de About Us -->
-            <div id="aboutPopup" class="popup">
-                <div class="overlay"></div>
-                <div class="popup-content">
-                    <span class="close">&times;</span> <!-- Cruz de cierre -->
-                    <p>
-                        At ZooSmart, we are committed to innovation and excellence in zoo management. Our web platform and mobile app are designed to revolutionize the daily management of zoos, allowing owners and managers to focus on delivering the best possible experience to their visitors and animals.
-                    </p>
-                    <p>
-                        We believe that by integrating IoT technology into our tools, we can optimize animal care and zoo operations, creating a safer and more efficient environment. All our devices are designed to be monitored and controlled in real time through our platform. This allows managers to have precise and detailed control of every aspect of animal care and zoo operation.
-                    </p>
-                    <h1 class="contact">
-                        CONTACT
-                        <div class="contain-us">
-                            <a href="mailto:healthyhubb.official@gmail.com" target="_blank">
-                                ZooSmart@gmail.com
-                                <img>
-                            </a>
-                        </div>
-                    </h1>
-                </div>
+        <!-- Popup de About Us -->
+        <div id="aboutPopup" class="popup">
+            <div class="overlay"></div>
+            <div class="popup-content">
+                <span class="close">&times;</span> <!-- Cruz de cierre -->
+                <p>
+                    At ZooSmart, we are committed to innovation and excellence in zoo management. Our web platform and mobile app are designed to revolutionize the daily management of zoos, allowing owners and managers to focus on delivering the best possible experience to their visitors and animals.
+                </p>
+                <p>
+                    We believe that by integrating IoT technology into our tools, we can optimize animal care and zoo operations, creating a safer and more efficient environment. All our devices are designed to be monitored and controlled in real time through our platform. This allows managers to have precise and detailed control of every aspect of animal care and zoo operation.
+                </p>
+                <h1 class="contact">
+                    CONTACT
+                    <div class="contain-us">
+                        <a href="mailto:healthyhubb.official@gmail.com" target="_blank">
+                            ZooSmart@gmail.com
+                            <img>
+                        </a>
+                    </div>
+                </h1>
             </div>
-            <script>
-                document.addEventListener('DOMContentLoaded', function() {
+        </div>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
                 document.getElementById('about').addEventListener('click', function() {
                     document.getElementById('aboutPopup').style.display = 'block';
                 });
@@ -80,23 +101,21 @@
                     document.getElementById('aboutPopup').style.display = 'none';
                 });
             });
-
-
-            </script>           
+        </script>          
         <a>CONTACT</a>
     </div>
     
-            <div class="text">
-                <img src="img/logoH.png" alt="logo">
-                <p class="slogan">WHERE TECHNOLOGY PROTECTS WILDLIFE</p>
-            </div> 
+    <div class="text">
+        <img src="img/logoH.png" alt="logo">
+        <p class="slogan">WHERE TECHNOLOGY PROTECTS WILDLIFE</p>
+    </div> 
 
-            <div class="btn">
-                <a href="createAcc.html">
-                    <button class="button">Create an account</button>
-                </a>
-            </div> 
-            <img class="LeopardoImg" src="img/Leopardo.png">
-            <img class="chamaleonImg" src="img/chameleon.png">
+    <div class="btn">
+        <a href="createAcc.html">
+            <button class="button">Create an account</button>
+        </a>
+    </div> 
+    <img class="LeopardoImg" src="img/Leopardo.png">
+    <img class="chamaleonImg" src="img/chameleon.png">
 </body>
 </html>

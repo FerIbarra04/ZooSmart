@@ -13,7 +13,7 @@
     </header>
     <main class="form-container">
         <!-- Formulario para crear cuenta -->
-        <form id="adminForm">
+        <form id="adminForm" action="/api/create-account" method="POST">
             <div class="part">
                 <h2>Admin Information</h2>
                 <input class="input" name="name" type="text" placeholder="Name" required>
@@ -29,41 +29,15 @@
                     <input class="input-zoo" name="name" type="text" placeholder="Name" required>
                     <input class="input-zoo" name="name" type="text" placeholder="Name" required>
                 </div>
-                <input class="input" name="address" type="text" placeholder="Address (street number and location)" required>
+            <input class="input" name="address" type="text" placeholder="Address (street number and location)" required>
+            </div>
+            <div class="btnNxt">
+                <button class="nextBtn" type="submit">CREATE</button>
             </div>
         </form>
-
-        <div class="btnNxt">
-            <button class="nextBtn" type="submit">CREATE</button>
-        </div>
-        
     </main>
     <div class="background-image-container">
         <img src="img/fondo_CAcc.png" class="background-image">
     </div>
-    <script>
-        document.getElementById('adminForm').addEventListener('submit', async function(event) {
-            event.preventDefault();
-            const formData = new FormData(event.target);
-            const data = {};
-            formData.forEach((value, key) => {
-                data[key] = value;
-            });
-
-            const response = await fetch('/api/admins/create-admin', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            });
-
-            if (response.ok) {
-                window.location.href = 'CrADos.html';
-            } else {
-                alert('Error al crear la cuenta');
-            }
-        });
-    </script>
 </body>
 </html>
