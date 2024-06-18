@@ -36,6 +36,29 @@ body, html {
 .header hr {
     border: 2px solid white;
 }
+.contain-add{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.date{
+    text-align: center;
+    font-family: "Bree Serif", serif; 
+    font-weight: 100;
+    font-size: 30px;
+}
+.input-dateAdd {
+    width: 350px;
+    text-align: center;
+    padding: 8px;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    background-color: rgba(255, 255, 255, 0.001);
+    font-family: "Questrial", sans-serif;
+    font-size: 20px;
+}
 
 .form-container {
     position: fixed;
