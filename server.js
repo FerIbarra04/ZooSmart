@@ -2,13 +2,21 @@ const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
 const bodyParser = require('body-parser');
-const session = require('express-session'); // Importa el paquete de sesiones
+const session = require('express-session');
+const cors = require('cors');
 
 const Admin = require('./models/Admin');
 const Zoo = require('./models/Zoo');
 
 const app = express();
 const port = 3000;
+
+// Configura CORS para permitir solicitudes desde la app
+app.use(cors({
+  origin: '*', // Puedes cambiar esto a la URL de tu app en producción
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
 
 // Configura el middleware
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -20,7 +28,7 @@ app.use(session({
   secret: 'yourSecretKey',
   resave: false,
   saveUninitialized: true,
-  cookie: { secure: false } // Cambia a true si usas HTTPS
+  cookie: { secure: false }
 }));
 
 // Conecta a la base de datos MongoDB
@@ -41,7 +49,7 @@ mongoose.connection.on('error', (err) => {
 // Define la ruta para crear una cuenta
 app.post('/api/create-account', async (req, res) => {
   try {
-    const { name, email, password, nameZoo, country, state, city, address } = req.body;
+    const { name, email, password, nameZoo, country, state, city, address, isMobileApp } = req.body;
 
     const lastAdmin = await Admin.findOne().sort({ id: -1 });
     const newAdminId = lastAdmin ? lastAdmin.id + 1 : 1;
@@ -82,8 +90,13 @@ app.post('/api/create-account', async (req, res) => {
       address: address
     };
 
-    // Redirige al usuario
-    res.redirect('/home.html');
+    if (isMobileApp) {
+      // Responde con los datos del usuario (para la app)
+      res.status(201).json({ message: 'Cuenta creada exitosamente', user: req.session.user });
+    } else {
+      // Redirige al usuario (para la web)
+      res.redirect('/home.html');
+    }
   } catch (error) {
     console.error('Error al crear la cuenta:', error);
     res.status(500).send('Error al crear la cuenta');
@@ -93,7 +106,7 @@ app.post('/api/create-account', async (req, res) => {
 // Define la ruta para iniciar sesión
 app.post('/api/login', async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { email, password, isMobileApp } = req.body;
     const admin = await Admin.findOne({ email: email, contraseña: password });
 
     if (admin) {
@@ -111,22 +124,19 @@ app.post('/api/login', async (req, res) => {
         address: zoo.direccion
       };
 
-      res.redirect('/home.html');
+      if (isMobileApp) {
+        // Responde con los datos del usuario (para la app)
+        res.status(200).json({ message: 'Inicio de sesión exitoso', user: req.session.user });
+      } else {
+        // Redirige al usuario (para la web)
+        res.redirect('/home.html');
+      }
     } else {
       res.status(401).json({ message: 'Correo o contraseña incorrectos' });
     }
   } catch (error) {
     console.error('Error al iniciar sesión:', error);
     res.status(500).send('Error al iniciar sesión');
-  }
-});
-
-// Define una ruta para servir el archivo home.html
-app.get('/home.html', (req, res) => {
-  if (!req.session.user) {
-    res.redirect('/');
-  } else {
-    res.sendFile(path.join(__dirname, 'public', 'home.html'));
   }
 });
 
