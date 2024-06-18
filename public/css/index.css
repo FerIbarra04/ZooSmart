@@ -31,7 +31,7 @@ body {
     display: flex;
     justify-content: space-evenly;
     padding-top: 20px;
-    position: relative; /* Importante para el posicionamiento absoluto del formulario */
+    position: relative; /* Importante para el posic |ionamiento absoluto del formulario */
 }
 
 .header a {
@@ -134,7 +134,7 @@ body {
     flex-direction: column;
     align-items: center;
 }
-.text img{
+.logo{
     width: 350px;
 }
 .slogan{
@@ -149,7 +149,6 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-
 }
 .button {
     padding: 8px 60px;
@@ -245,7 +244,59 @@ body {
     align-items: center;
     justify-content: center;
 }
+/*TABLET*/
+@media screen and (max-width: 768px) {
+    .header a {
+        font-size: 23px;
+    }
+    .login {
+        width: 150px;
+    }
+    .slogan{
+        font-size: 45px;
+        margin: 20px 100px 25px 100px;
+    }
+    .text img{
+        width: 280px;
+    }
+    .button {
+        padding: 8px 60px;
+        font-size: 22px;
+      }
+    .LeopardoImg{
+        width: 54%;
+    }
+    .chamaleonImg{
+        width: 39%;
+    }
+}
 
-
-
-
+/*MOVIL*/
+@media screen and (max-width: 425px) {
+    .header a {
+        font-size: 19px;
+    }
+    .login {
+        width: 100px;
+    }
+    .text img{
+        width: 10px;
+    }
+    .slogan{
+        font-size: 43px;
+        margin: 10px 35px 20px 35px;
+    }
+    .text img{
+        width: 280px;
+    }
+    .button {
+        padding: 8px 50px;
+        font-size: 18px;
+      }
+    .LeopardoImg{
+        width: 55%;
+    }
+    .chamaleonImg{
+        width: 40%;
+    }
+}
