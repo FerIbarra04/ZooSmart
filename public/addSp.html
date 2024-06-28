@@ -12,29 +12,26 @@
         <hr>
     </header>
     <main class="form-container">
-        <!--Formulario para crear cuenta-->
-        <form action="/submit" method="post">
+        <!-- Formulario para crear una nueva especie -->
+        <form action="/api/animal/create-animal" method="post"> <!-- Ajusta la acción del formulario al endpoint correcto -->
             <div class="elements-form">
                 <div class="first-part">
-                    <input class="input" name="text" type="text" placeholder="Name">
-                    <input class="input" name="text" type="text" placeholder="Description">
-                    <input class="input" name="text" type="text" placeholder="Diet">
+                    <input class="input" name="nombre" type="text" placeholder="Name"> <!-- Nombre de la especie -->
+                    <input class="input" name="descripcion" type="text" placeholder="Description"> <!-- Descripción -->
+                    <input class="input" name="dieta" type="text" placeholder="Diet"> <!-- Dieta -->
                 </div>
                 <div class="second-part">
                     <div class="date">
-                        <input class="input-date" name="text" type="date" placeholder="Name Zoo">
-                        <input class="input-date" name="text" type="date" placeholder="Name Zoo">
+                        <input class="input-date" name="fecha_nacimiento" type="date" placeholder="Date of Birth"> <!-- Fecha de nacimiento -->
+                        <input class="input-date" name="fecha_arrivo" type="date" placeholder="Arrival Date"> <!-- Fecha de llegada -->
                     </div>
                     <div class="edad">
-                        <h1>Aqui va la edad del animal</h1>
+                        <h1>Age of the animal will be calculated automatically</h1> <!-- La edad se calculará automáticamente en el backend -->
                     </div>
-                        <input class="input" name="text" type="text" placeholder="Name Zoo">
                 </div>
             </div>
             <div class="btnNxt">
-                <a href="home.html">
-                    <button class="nextBtn" type="submit">CREATE</button>
-                </a>
+                <button class="nextBtn" type="submit">CREATE</button> <!-- Botón para enviar el formulario -->
             </div>
         </form>           
     </main>

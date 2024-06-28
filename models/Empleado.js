@@ -9,7 +9,7 @@ const EmpleadoSchema = new mongoose.Schema({
   email: { type: String, required: true, unique: true },
   contraseña: { type: String, required: true },
   fecha_nacimiento: { type: Date, required: true },
-  fecha_agregado: { type: Date, required: true },
+  fecha_agregado: { type: Date, required: true,default: Date.now },
 }, {
   collection: 'Empleados' // Nombre de la colección en MongoDB
 });

@@ -27,44 +27,74 @@
             </form>
         </div>
         <script>
-            document.getElementById("botonDesplegar").addEventListener("click", function() {
-                var formulario = document.getElementById("formularioDesplegable");
-                if (formulario.classList.contains("mostrando")) {
-                    formulario.classList.remove("mostrando"); // Ocultar el formulario
-                } else {
-                    formulario.classList.add("mostrando"); // Mostrar el formulario
-                }
-            });
-
-            document.getElementById("loginForm").addEventListener("submit", function(event) {
-                event.preventDefault();
-                var email = document.getElementById("email").value;
-                var password = document.getElementById("password").value;
-
-                fetch('/api/login', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ email: email, password: password })
-                })
-                .then(response => {
-                    if (response.redirected) {
-                        window.location.href = response.url;
+            document.addEventListener('DOMContentLoaded', function() {
+                // Mostrar u ocultar formulario de login al hacer clic en "LOGIN"
+                document.getElementById("botonDesplegar").addEventListener("click", function() {
+                    var formulario = document.getElementById("formularioDesplegable");
+                    formulario.classList.toggle("mostrando"); // Alternar la visibilidad del formulario
+                });
+    
+                // Manejar el envío del formulario de inicio de sesión
+                document.getElementById("loginForm").addEventListener("submit", function(event) {
+                    event.preventDefault();
+                    var email = document.getElementById("email").value;
+                    var password = document.getElementById("password").value;
+    
+                    // Determinar la ruta de inicio de sesión basada en el tipo de usuario
+                    var loginRoute = determineLoginRoute(email);
+    
+                    // Realizar la solicitud POST al endpoint correspondiente
+                    fetch(loginRoute, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ email: email, password: password })
+                    })
+                    .then(response => {
+                        if (response.redirected) {
+                            window.location.href = response.url; // Redirigir si se devuelve una redirección
+                        } else {
+                            return response.json(); // Retornar JSON si no hay redirección
+                        }
+                    })
+                    .then(data => {
+                        // Manejar la respuesta del servidor
+                        if (data.success) {
+                            window.location.href = data.redirectUrl; // Redirigir según la respuesta del servidor
+                        } else {
+                            alert('Login failed: ' + data.message); // Mostrar mensaje de error
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error); // Manejar errores de conexión o servidor
+                    });
+                });
+    
+                // Función para determinar la ruta de inicio de sesión basada en el email
+                function determineLoginRoute(email) {
+                    if (email.endsWith('@Emp.com')) {
+                        return '/api/empleado/login'; // Endpoint para inicio de sesión de empleado
                     } else {
-                        return response.json();
+                        return '/api/admin/login'; // Endpoint para inicio de sesión de administrador
                     }
-                })
-                .then(data => {
-                    if (data && data.message) {
-                        alert(data.message);
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
+                }
+    
+                // Eventos para mostrar y ocultar el popup de "About Us"
+                document.getElementById('about').addEventListener('click', function() {
+                    document.getElementById('aboutPopup').style.display = 'block';
+                });
+    
+                document.querySelector('.popup .overlay').addEventListener('click', function() {
+                    document.getElementById('aboutPopup').style.display = 'none';
+                });
+    
+                document.querySelector('.popup .close').addEventListener('click', function() {
+                    document.getElementById('aboutPopup').style.display = 'none';
                 });
             });
         </script>
+
         <!------------------------------------------------------------>
         <!-- Popup de About Us -->
         <div id="aboutPopup" class="popup">

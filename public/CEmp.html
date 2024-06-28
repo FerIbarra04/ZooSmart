@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,13 +13,12 @@
     </header>
 
     <main class="form-container">
-        <!-- Formulario para crear cuenta -->
         <div class="contain-add">
             <h1 class="date">Date Added</h1>
-            <input class="input-dateAdd" id="name" name="name" type="date" required>    
+            <input class="input-dateAdd" id="dateAdded" name="dateAdded" type="date" required>    
         </div>
 
-        <form action="/submit" method="post">
+        <form action="/api/empleado/create-employee" method="post" onsubmit="completeEmail()">
             <div class="form-row">
               <div class="form-group">
                 <input class="input" id="name" name="name" type="text" placeholder="Name" required>
@@ -30,8 +28,9 @@
               </div>
             </div>
             <div class="form-row">
-              <div class="form-group">
-                <input class="input" id="email" name="email" type="email" placeholder="Email" required>
+              <div class="form-group email-wrapper">
+                <input class="input" id="emailPrefix" name="emailPrefix" type="text" placeholder="@Emp.com" required oninput="validateEmailPrefix()"><h1>@Emp.com"</h1>
+                <input type="hidden" id="email" name="email">
               </div>
               <div class="form-group">
                 <input class="input" id="password" name="password" type="password" placeholder="Password" required>
@@ -41,45 +40,49 @@
             <label class="addZone" id="botonDesplegar">+ ASSIGN ZONE</label>
             <div id="formularioDesplegable" class="formulario">
                 <div class="animal">
-                    <div class="reptil-opt" onclick="seleccionarZona('reptil')">Reptil</div>
-                    <div class="aquatic-opt" onclick="seleccionarZona('aquatic')">Aquatic</div>
+                    <div class="reptil-opt" onclick="seleccionarZona('Reptil')">Reptil</div>
+                    <div class="aquatic-opt" onclick="seleccionarZona('Aquatic')">Aquatic</div>
                 </div>
                 <div class="animal">
-                    <div class="land-opt" onclick="seleccionarZona('land')">Land</div>
-                    <div class="bird-opt" onclick="seleccionarZona('bird')">Bird</div>
+                    <div class="land-opt" onclick="seleccionarZona('Land')">Land</div>
+                    <div class="bird-opt" onclick="seleccionarZona('Bird')">Bird</div>
                 </div>
             </div>
         
-            <!-- Campo oculto para almacenar la zona seleccionada -->
-            <input type="hidden" id="zonaSeleccionada" name="zonaSeleccionada">
+            <input type="hidden" id="zonaSeleccionada" name="zone">
         
             <div class="btnNxt">
               <button class="nextBtn" type="submit">CREATE</button>
             </div>
         </form>
         
-          <script>
+        <script>
             document.getElementById("botonDesplegar").addEventListener("click", function() {
               var formulario = document.getElementById("formularioDesplegable");
               if (formulario.classList.contains("mostrando")) {
-                formulario.classList.remove("mostrando"); // Ocultar el formulario
+                formulario.classList.remove("mostrando");
               } else {
-                formulario.classList.add("mostrando"); // Mostrar el formulario
+                formulario.classList.add("mostrando");
               }
             });
         
             function seleccionarZona(zona) {
-              // Asignar la zona seleccionada al campo oculto del formulario
               document.getElementById('zonaSeleccionada').value = zona;
-              
-              // Mostrar alerta de selección exitosa
               alert('Zona seleccionada correctamente: ' + zona);
-              
-              // Ocultar el formulario desplegable después de seleccionar una zona
               var formulario = document.getElementById('formularioDesplegable');
-              formulario.classList.remove('mostrando'); // Ocultar el formulario desplegable
+              formulario.classList.remove('mostrando');
             }
-          </script>
+
+            function completeEmail() {
+              const emailPrefix = document.getElementById('emailPrefix').value;
+              document.getElementById('email').value = emailPrefix + '@Emp.com';
+            }
+
+            function validateEmailPrefix() {
+              const emailPrefixInput = document.getElementById('emailPrefix');
+              emailPrefixInput.value = emailPrefixInput.value.replace(/@.*/, '');
+            }
+        </script>
             
     </main>
     <div class="background-image-container">
