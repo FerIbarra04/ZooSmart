@@ -245,6 +245,9 @@ body {
     align-items: center;
     justify-content: center;
 }
+.contain-us a{
+    color: inherit;
+}
 /*TABLET*/
 @media screen and (max-width: 768px) {
     .header a {
