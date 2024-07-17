@@ -1,0 +1,150 @@
+@import url('https://fonts.cdnfonts.com/css/gagalin');
+/*slogan   font-family: 'Gagalin', sans-serif;*/
+@import url('https://fonts.googleapis.com/css2?family=Bree+Serif&display=swap');
+/*titles y botones  font-family: "Bree Serif", serif; font-weight: 100; 34px*/
+@import url('https://fonts.googleapis.com/css2?family=Questrial&display=swap');
+/*text     font-family: "Questrial", sans-serif; 24px*/
+
+body {
+  margin: 0;
+}
+.header {
+  position: relative;
+  height: 550px;
+}
+
+.header::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('SiluetaFondo.png');
+  background-size: 100% 110%;
+  opacity: 0.5;
+}
+
+.header {
+    background: rgb(74,184,255);
+    background: linear-gradient(180deg, rgba(74,184,255,1) 5%, rgba(255,182,40,1) 38%, rgba(255,139,55,1) 65%);
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.head img {
+  height: 95px;
+  margin: 30px 0 0 75px;
+}
+.button-container {
+  position: relative;
+}
+
+button {
+  border: 0;
+  width: 150px;
+  height: 40px;
+  background-color: rgb(206, 65, 255);
+  color: #ffffff;
+  transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+  font-family: "Bree Serif", serif;
+  font-size: 20px;
+  letter-spacing: 2px;
+  margin: 30px 75px 0 0;
+  position: relative; 
+}
+button:hover {
+  background-color: #EB4103;
+  box-shadow: 0 0 20px #EB410350;
+  transform: scale(1.1);
+}
+button:active {
+  background-color: #3d94cf;
+  transition: all 0.25s;
+  -webkit-transition: all 0.25s;
+  box-shadow: none;
+  transform: scale(0.98);
+}
+h1{
+  position: relative; /* Agrega esta propiedad */
+  text-align: center;
+  font-family: "Bree Serif", serif; 
+  font-weight: 500;
+  font-size: 50px;
+  color: white;
+}
+
+
+
+.container-species{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 50px 0px 50px 0px;
+}
+.specie{
+    display: flex;
+    flex-direction: row;
+    width: 800px;
+    height: auto;
+    border: solid 4px black;
+    padding: 25px;
+    margin: 10px;
+}
+.infoSp{
+    display: flex;
+    flex-direction: column;
+    width: 75%;
+}
+.infoSp h1{
+    font-family: "Bree Serif", serif;
+    font-size: 35px;
+    font-weight: 100;
+    text-align: start;
+    color: black;
+    margin: 0%;
+}
+.infoSp p{
+    font-family: "Questrial", sans-serif;
+    font-size: 20px;
+    text-align: justify;
+    margin-left: 15px;
+}
+/*BTN more*/
+.btnMore{
+    width: 25%;
+}
+.btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 150px;
+    padding: 10px;
+    border-radius: 50px;
+    cursor: pointer;
+    border: 0;
+    background-color: #19B8BF;
+    font-size: 20px;
+    transition: all 0.5s ease;
+    font-family: "Bree Serif", serif;
+    color: white;
+    margin-left: 35px;
+  }
+  
+.btn:hover {
+    background-color: hsl(16deg 97% 47%);
+    color: hsl(0, 0%, 100%);
+    box-shadow: rgb(235 65 3) 0px 0px 18px 0px;
+  }
+  
+.btn:active {
+    background-color: hsl(16deg 97% 47%);
+    color: hsl(0, 0%, 100%);
+    box-shadow: rgb(235 65 3) 0px 0px 18px 0px;
+    transform: translateY(10px);
+    transition: 100ms;
+  }

@@ -65,6 +65,7 @@ header{
     transform: translateY(10px);
     transition: 100ms;
   }
+  
   .title-spe{
     font-family: "Bree Serif", serif;
     font-size: 38px;
