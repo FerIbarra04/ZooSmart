@@ -12,31 +12,67 @@
         <hr>
     </header>
     <main class="form-container">
-        <!-- Formulario para crear una nueva especie -->
-        <form action="/api/animal/create-animal" method="post"> <!-- Ajusta la acción del formulario al endpoint correcto -->
+        <form id="animalForm" action="/api/animal/create-animal" method="post">
             <div class="elements-form">
                 <div class="first-part">
-                    <input class="input" name="nombre" type="text" placeholder="Name"> <!-- Nombre de la especie -->
-                    <input class="input" name="descripcion" type="text" placeholder="Description"> <!-- Descripción -->
-                    <input class="input" name="dieta" type="text" placeholder="Diet"> <!-- Dieta -->
+                    <input class="input" name="nombre" type="text" placeholder="Name" required>
+                    <input class="input" name="descripcion" type="text" placeholder="Description" required>
+                    <input class="input" name="info_adicional" type="text" placeholder="Additional Information">
+                    <input class="input" name="dieta" type="text" placeholder="Diet" required>
                 </div>
                 <div class="second-part">
                     <div class="date">
-                        <input class="input-date" name="fecha_nacimiento" type="date" placeholder="Date of Birth"> <!-- Fecha de nacimiento -->
-                        <input class="input-date" name="fecha_arrivo" type="date" placeholder="Arrival Date"> <!-- Fecha de llegada -->
+                        <input class="input-date" name="fecha_nacimiento" type="date" placeholder="Date of Birth" required>
+                        <input class="input-date" name="fecha_arrivo" type="date" placeholder="Arrival Date" required>
+                    </div>
+                    <div class="zona">
+                        <select class="input" name="zona" required>
+                            <option value="" disabled selected>Select Zone</option>
+                            <option value="Reptilis">Reptilis</option>
+                            <option value="Aquatic">Aquatic</option>
+                            <option value="Birds">Birds</option>
+                            <option value="Land">Land</option>
+                        </select>
                     </div>
                     <div class="edad">
-                        <h1>Age of the animal will be calculated automatically</h1> <!-- La edad se calculará automáticamente en el backend -->
+                        <h1>Age of the animal will be calculated automatically</h1>
                     </div>
                 </div>
             </div>
             <div class="btnNxt">
-                <button class="nextBtn" type="submit">CREATE</button> <!-- Botón para enviar el formulario -->
+                <button class="nextBtn" type="submit">CREATE</button>
             </div>
         </form>           
     </main>
     <div class="background-image-container">
         <img src="img/CreateAnimalf.png" class="background-image">
     </div>
+
+    <script>
+        document.getElementById('animalForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData.entries());
+
+            const response = await fetch('/api/animal/create-animal', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            });
+
+            const result = await response.json();
+
+            if (response.ok) {
+                // Redirigir a la URL que devuelve el servidor
+                window.location.href = result.url;
+            } else {
+                console.log('Response status:', response.status);
+            }
+        });
+    </script>
+
 </body>
 </html>

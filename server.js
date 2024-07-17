@@ -54,7 +54,7 @@ app.use('/api/zoo', zooRoutes);
 app.use('/api/empleado', empleadoRoutes);
 app.use('/api/animal', animalRoutes);
 
-// Define una ruta para obtener los datos del usuario
+//ruta para obtener los datos del usuario
 app.get('/api/user', (req, res) => {
   if (!req.session.user) {
     res.status(401).send('No autorizado');

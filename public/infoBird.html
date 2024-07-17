@@ -8,7 +8,7 @@
 </head>
 <body>
     <header>
-        <a href="birdZone.html">
+        <a href="BirdsZone.html">
             <img class="atras" src="img/atras.png">
         </a>
         <h1 class="title">BIRDS ZONE</h1>
@@ -16,69 +16,88 @@
     </header>
     <section class="container-inf">
         <div class="dates">
-            <!--Dentro de las etiquetas p ira la informacion de cada animal-->
             <h1 class="title-date">Age:</h1>
-                <p class="infoDate">19 years old</p>
+            <p class="infoDate" id="age"></p>
             <h1 class="title-date">Birthdate:</h1>
-                <p class="infoDate">23/12/2004<p>
-            <h1 class="title-date">Arrvie Date:</h1>
-                <p class="infoDate">29/05/24</p>
+            <p class="infoDate" id="birthdate"></p>
+            <h1 class="title-date">Arrive Date:</h1>
+            <p class="infoDate" id="arriveDate"></p>
         </div>
         <div class="container-employee">
-            <h1 class="titleEmp">Employe</h1>
-            <div class="employee">
-                <div class="InfoEmp">
-                    <!--Dentro de las etiqueta h1 ira el nombre del empleado-->
-                    <h1 class="name">Fernanda</h1>
-                    <img class="delete" src="img/delete.png">
-                </div>
-                <div class="InfoEmp">
-                    <!--Dentro de las etiqueta h1 ira el nombre del empleado-->
-                    <h1 class="name">Luisa</h1>
-                    <img class="delete" src="img/delete.png">
-                </div>
-                <div class="InfoEmp">
-                    <!--Dentro de las etiqueta h1 ira el nombre del empleado-->
-                    <h1 class="name">Natalia</h1>
-                    <img class="delete" src="img/delete.png">
-                </div>
-            </div>
+            <h1 class="titleEmp">Employee</h1>
+            <div class="employee" id="employeeList"></div>
         </div>
     </section>
     <section class="container-inf-animal">
         <div>
-            <!--Dentro de las etiqueta h1 ira el nombre del animal-->
-            <h1 class="animal">Leon</h1>
-            <!--Dentro de las etiqueta p ira la descripcion del animal-->
-            <p class="description">
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium enim officiis excepturi, placeat minus alias in dignissimos maxime repudiandae, officia non repellendus iusto ex. Eligendi vitae dolorem et corrupti soluta.
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nihil, voluptates pariatur? Error distinctio officiis adipisci facilis. Inventore explicabo sed, laboriosam labore, libero minus at alias rem expedita reiciendis mollitia consequuntur.
-            </p>
+            <h1 class="animal" id="animalName"></h1>
+            <p class="description" id="animalDescription"></p>
         </div>
         <div>
             <h1 class="title-info">Diet</h1>
-            <!--Dentro de las etiqueta p ira la descripcion del animal segun su dieta-->
-            <p class="description-animal">
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium enim officiis excepturi, placeat minus alias in dignissimos maxime repudiandae, officia non repellendus iusto ex. Eligendi vitae dolorem et corrupti soluta.
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nihil, voluptates pariatur? Error distinctio officiis adipisci facilis. Inventore explicabo sed, laboriosam labore, libero minus at alias rem expedita reiciendis mollitia consequuntur.
-            </p>
+            <p class="description-animal" id="animalDiet"></p>
         </div>
         <div>
             <h1 class="title-info">Additional data</h1>
-            <!--Dentro de las etiqueta p ira la descripcion del animal segun su Additional data-->
-            <p class="description-animal">
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium enim officiis excepturi, placeat minus alias in dignissimos maxime repudiandae, officia non repellendus iusto ex. Eligendi vitae dolorem et corrupti soluta.
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nihil, voluptates pariatur? Error distinctio officiis adipisci facilis. Inventore explicabo sed, laboriosam labore, libero minus at alias rem expedita reiciendis mollitia consequuntur.
-            </p>
+            <p class="description-animal" id="animalAdditionalData"></p>
         </div>
     </section>
     <h1 class="title-dispenser">DispenserFoodZoo</h1>
-
     <div class="btn">
         <a>
-            <button class="button">Create an account</button>
+            <button class="button" id="deleteButton">DELETE</button>
         </a>
-    </div>  
+    </div>
 
+    <script>
+        async function loadAnimal() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const animalId = urlParams.get('id');
+            const response = await fetch(`/api/animal/${animalId}`);
+            const animal = await response.json();
+
+            if (animal) {
+                document.getElementById('animalName').textContent = animal.nombre;
+                document.getElementById('animalDescription').textContent = animal.descripcion;
+                document.getElementById('age').textContent = `${animal.edad.años} años, ${animal.edad.meses} meses, ${animal.edad.dias} días`;
+                document.getElementById('birthdate').textContent = new Date(animal.fecha_nacimiento).toLocaleDateString();
+                document.getElementById('arriveDate').textContent = new Date(animal.fecha_arrivo).toLocaleDateString();
+                document.getElementById('animalDiet').textContent = animal.dieta;
+                document.getElementById('animalAdditionalData').textContent = animal.info_adicional;
+
+                 // Obtener empleados de la misma zona
+                 const employeeResponse = await fetch(`/api/empleado/zone/${animal.zona}`);
+                const employees = await employeeResponse.json();
+
+                const employeeList = document.getElementById('employeeList');
+                employees.forEach(emp => {
+                    const empDiv = document.createElement('div');
+                    empDiv.className = 'InfoEmp';
+                    empDiv.innerHTML = `<h1 class="name">${emp.nombre}</h1><img class="delete" src="img/delete.png">`;
+                    employeeList.appendChild(empDiv);
+                });
+            }
+        }
+        document.getElementById('deleteButton').addEventListener('click', async () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const animalId = urlParams.get('id');
+
+            const confirmDelete = confirm('¿Estás seguro de que deseas eliminar este animal?');
+            if (confirmDelete) {
+                const response = await fetch(`/api/animal/${animalId}`, {
+                    method: 'DELETE'
+                });
+
+                if (response.ok) {
+                    alert('Animal eliminado correctamente');
+                    window.location.href = 'LandZone.html'; // Redirigir a la página anterior
+                } else {
+                    alert('Error al eliminar el animal. Inténtalo de nuevo.');
+                }
+            }
+        });
+
+        loadAnimal();
+    </script>
 </body>
 </html>

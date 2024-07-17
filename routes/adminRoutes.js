@@ -3,6 +3,7 @@ const router = express.Router();
 const Admin = require('../models/Admin');
 const Zoo = require('../models/Zoo');
 
+// Crear cuenta de admin
 router.post('/create-account', async (req, res) => {
   try {
     const { name, email, password, nameZoo, country, state, city, address, isMobileApp } = req.body;
@@ -10,16 +11,18 @@ router.post('/create-account', async (req, res) => {
     const lastAdmin = await Admin.findOne().sort({ id: -1 });
     const newAdminId = lastAdmin ? lastAdmin.id + 1 : 1;
 
+    // Crear nuevo administrador
     const newAdmin = new Admin({
       id: newAdminId,
       nombre: name,
       email: email,
       contraseña: password,
-      nombre_zoo: nameZoo
+      nombre_zoo: nameZoo,
     });
 
     await newAdmin.save();
 
+    // Crear nuevo zoológico
     const newZoo = new Zoo({
       id: newAdminId,
       nombre: nameZoo,
@@ -36,9 +39,9 @@ router.post('/create-account', async (req, res) => {
 
     req.session.user = {
       id: newAdminId,
+      zoo_name: nameZoo,
       name: name,
       email: email,
-      nameZoo: nameZoo,
       country: country,
       state: state,
       city: city,
@@ -55,6 +58,7 @@ router.post('/create-account', async (req, res) => {
   }
 });
 
+// Iniciar sesión
 router.post('/login', async (req, res) => {
   try {
     const { email, password, isMobileApp } = req.body;
@@ -65,9 +69,9 @@ router.post('/login', async (req, res) => {
 
       req.session.user = {
         id: admin.id,
+        zoo_name: zoo.nombre,
         name: admin.nombre,
         email: admin.email,
-        nameZoo: zoo.nombre,
         country: zoo.pais,
         state: zoo.estado,
         city: zoo.ciudad,

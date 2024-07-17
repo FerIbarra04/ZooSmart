@@ -21,27 +21,107 @@
     </p>
     <div class="btnAdd">
         <a href="addSp.html">
-            <button class="button">+ADD SPECIES</button>
+          <button class="button">+ADD SPECIES</button>
         </a>
-    </div>   
-    <h1 class="title-spe">SPECIES</h1>
+      </div>   
+      
+      <h1 class="title-spe">SPECIES</h1>
+      
+      <section class="container-species" id="speciesContainer">
+        <!-- Aquí se cargarán las especies dinámicamente -->
+      </section>
     
-    <section class="container-species">
-        <div class="specie">
-            <div class="infoSp">
-                <!--Dentro de la etiquta de h1 ira el nombre la especie-->
-                <h1>Leon</h1>
-                <!--Dentro de la etiquta de p ira la descripcion la especie-->
-                <p>
-                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Harum quasi aliquid laboriosam, unde odit quibusdam ad nisi ipsa ducimus libero, rerum delectus velit vitae molestias vero magni similique, consequatur qui!
-                </p>
-            </div>
-            <div class="btnMore">
-                <a href="infoLand.html">
-                    <button class="btn">More</button>
-                </a>
-            </div>
-        </div>
-    </section>
+      <script>
+        async function loadAnimals() {     
+    const zooResponse = await fetch('/api/user'); // Obtén la información de la sesión
+    const zooData = await zooResponse.json();
+    const zooName = zooData.zoo_name;
+
+    const response = await fetch('/api/animal/byZoo'); // Cambiar a la nueva ruta
+    const animals = await response.json();
+    const speciesContainer = document.getElementById('speciesContainer'); 
+    
+            // Obtener el ID del nuevo animal
+            const urlParams = new URLSearchParams(window.location.search);
+            const newAnimalId = urlParams.get('id');
+    
+            // Mostrar el animal recién creado y todos los de la zona "Reptilis"
+            animals.forEach(animal => {
+                if (animal.zona === 'Land') {
+                    const specieDiv = document.createElement('div');
+                    specieDiv.className = 'specie';
+    
+                    const infoSpDiv = document.createElement('div');
+                    infoSpDiv.className = 'infoSp';
+    
+                    const animalName = document.createElement('h1');
+                    animalName.textContent = animal.nombre;
+    
+                    const animalDescription = document.createElement('p');
+                    animalDescription.textContent = animal.descripcion;
+    
+                    infoSpDiv.appendChild(animalName);
+                    infoSpDiv.appendChild(animalDescription);
+                    
+                    const btnMoreDiv = document.createElement('div');
+                    btnMoreDiv.className = 'btnMore';
+    
+                    const moreLink = document.createElement('a');
+                    moreLink.href = `infoLand.html?id=${animal._id}`;
+    
+                    const moreButton = document.createElement('button');
+                    moreButton.className = 'btn';
+                    moreButton.textContent = 'More';
+    
+                    moreLink.appendChild(moreButton);
+                    btnMoreDiv.appendChild(moreLink);
+    
+                    specieDiv.appendChild(infoSpDiv);
+                    specieDiv.appendChild(btnMoreDiv);
+                    speciesContainer.appendChild(specieDiv);
+                }
+            });
+    
+            // Mostrar el animal recién creado si existe
+            if (newAnimalId) {
+                const newAnimal = animals.find(animal => animal._id === newAnimalId);
+                if (newAnimal) {
+                    const specieDiv = document.createElement('div');
+                    specieDiv.className = 'specie';
+    
+                    const infoSpDiv = document.createElement('div');
+                    infoSpDiv.className = 'infoSp';
+    
+                    const animalName = document.createElement('h1');
+                    animalName.textContent = newAnimal.nombre;
+    
+                    const animalDescription = document.createElement('p');
+                    animalDescription.textContent = newAnimal.descripcion;
+    
+                    infoSpDiv.appendChild(animalName);
+                    infoSpDiv.appendChild(animalDescription);
+                    
+                    const btnMoreDiv = document.createElement('div');
+                    btnMoreDiv.className = 'btnMore';
+    
+                    const moreLink = document.createElement('a');
+                    moreLink.href = `infoLand.html?id=${newAnimal._id}`;
+    
+                    const moreButton = document.createElement('button');
+                    moreButton.className = 'btn';
+                    moreButton.textContent = 'More';
+    
+                    moreLink.appendChild(moreButton);
+                    btnMoreDiv.appendChild(moreLink);
+    
+                    specieDiv.appendChild(infoSpDiv);
+                    specieDiv.appendChild(btnMoreDiv);
+                    speciesContainer.appendChild(specieDiv);
+                }
+            }
+        }
+    
+        loadAnimals();
+      </script>
 </body>
 </html>

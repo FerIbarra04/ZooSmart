@@ -1,14 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const Empleado = require('../models/Empleado');
-const Admin = require('../models/Admin');
 
 // Ruta para crear un empleado
 router.post('/create-employee', async (req, res) => {
   try {
     const { name, birthdate, email, password, zone, dateAdded } = req.body;
     const adminId = req.session.user.id;
-    const nameZoo = req.session.user.nameZoo;
+    const nameZoo = req.session.user.zoo_name; // Corregido aquí
 
     // Generar un nuevo ID para el empleado
     const lastEmpleado = await Empleado.findOne().sort({ id: -1 });
@@ -78,5 +77,15 @@ router.get('/current-employee', (req, res) => {
     res.json(req.session.employee);
   }
 });
+
+router.get('/zone/:zona', async (req, res) => {
+  try {
+      const empleados = await Empleado.find({ zona: req.params.zona });
+      res.json(empleados);
+  } catch (error) {
+      res.status(500).json({ message: 'Error al obtener empleados', error });
+  }
+});
+
 
 module.exports = router;

@@ -5,6 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/CEmp.css">
     <title>Create Employee</title>
+    <style>
+        .email-wrapper {
+            position: relative;
+        }
+        .email-wrapper input[type="text"] {
+            padding-right: 70px; /* espacio suficiente para el texto @Emp.com */
+        }
+        .email-wrapper .email-suffix {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            pointer-events: none;
+            color: #000000;
+        }
+    </style>
 </head>
 <body>
     <header class="header">
@@ -29,7 +45,8 @@
             </div>
             <div class="form-row">
               <div class="form-group email-wrapper">
-                <input class="input" id="emailPrefix" name="emailPrefix" type="text" placeholder="@Emp.com" required oninput="validateEmailPrefix()"><h1>@Emp.com"</h1>
+                <input class="input" id="emailPrefix" name="emailPrefix" type="text" placeholder="Email" required oninput="validateEmailPrefix()">
+                <span class="email-suffix">@Emp.com</span>
                 <input type="hidden" id="email" name="email">
               </div>
               <div class="form-group">
@@ -40,12 +57,12 @@
             <label class="addZone" id="botonDesplegar">+ ASSIGN ZONE</label>
             <div id="formularioDesplegable" class="formulario">
                 <div class="animal">
-                    <div class="reptil-opt" onclick="seleccionarZona('Reptil')">Reptil</div>
+                    <div class="reptil-opt" onclick="seleccionarZona('Reptilis')">Reptilis</div>
                     <div class="aquatic-opt" onclick="seleccionarZona('Aquatic')">Aquatic</div>
                 </div>
                 <div class="animal">
                     <div class="land-opt" onclick="seleccionarZona('Land')">Land</div>
-                    <div class="bird-opt" onclick="seleccionarZona('Bird')">Bird</div>
+                    <div class="bird-opt" onclick="seleccionarZona('Birds')">Birds</div>
                 </div>
             </div>
         

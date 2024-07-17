@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reptil Zone</title>
+  <link rel="stylesheet" href="css/reptilZone.css">
+</head>
+<body>
+  <header>
+    <a href="home.html">
+      <img class="atras" src="img/atras.png">
+    </a>
+    <h1 class="title">REPTILIS ZONE</h1>
+    <img class="logo" src="img/logo.png">
+  </header>
+  <p class="description">
+    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sunt molestiae quasi ipsa quia ducimus,
+    repellendus aliquid vitae dolorem at ut sed expedita consectetur eius dolor?
+  </p>
+  
+  <div class="btnAdd">
+    <a href="addSp.html">
+      <button class="button">+ADD SPECIES</button>
+    </a>
+  </div>   
+  
+  <h1 class="title-spe">SPECIES</h1>
+  
+  <section class="container-species" id="speciesContainer">
+    <!-- Aquí se cargarán las especies dinámicamente -->
+  </section>
+
+  <script>
+    async function loadAnimals() {
+    const zooResponse = await fetch('/api/user'); // Obtén la información de la sesión
+    const zooData = await zooResponse.json();
+    const zooName = zooData.zoo_name;
+
+    const response = await fetch('/api/animal/byZoo'); // Cambiar a la nueva ruta
+    const animals = await response.json();
+    const speciesContainer = document.getElementById('speciesContainer'); 
+
+        // Obtener el ID del nuevo animal
+        const urlParams = new URLSearchParams(window.location.search);
+        const newAnimalId = urlParams.get('id');
+
+        // Mostrar el animal recién creado y todos los de la zona "Reptilis"
+        animals.forEach(animal => {
+            if (animal.zona === 'Reptilis') {
+                const specieDiv = document.createElement('div');
+                specieDiv.className = 'specie';
+
+                const infoSpDiv = document.createElement('div');
+                infoSpDiv.className = 'infoSp';
+
+                const animalName = document.createElement('h1');
+                animalName.textContent = animal.nombre;
+
+                const animalDescription = document.createElement('p');
+                animalDescription.textContent = animal.descripcion;
+
+                infoSpDiv.appendChild(animalName);
+                infoSpDiv.appendChild(animalDescription);
+                
+                const btnMoreDiv = document.createElement('div');
+                btnMoreDiv.className = 'btnMore';
+
+                const moreLink = document.createElement('a');
+                moreLink.href = `infoReptil.html?id=${animal._id}`;
+
+                const moreButton = document.createElement('button');
+                moreButton.className = 'btn';
+                moreButton.textContent = 'More';
+
+                moreLink.appendChild(moreButton);
+                btnMoreDiv.appendChild(moreLink);
+
+                specieDiv.appendChild(infoSpDiv);
+                specieDiv.appendChild(btnMoreDiv);
+                speciesContainer.appendChild(specieDiv);
+            }
+        });
+
+        // Mostrar el animal recién creado si existe
+        if (newAnimalId) {
+            const newAnimal = animals.find(animal => animal._id === newAnimalId);
+            if (newAnimal) {
+                const specieDiv = document.createElement('div');
+                specieDiv.className = 'specie';
+
+                const infoSpDiv = document.createElement('div');
+                infoSpDiv.className = 'infoSp';
+
+                const animalName = document.createElement('h1');
+                animalName.textContent = newAnimal.nombre;
+
+                const animalDescription = document.createElement('p');
+                animalDescription.textContent = newAnimal.descripcion;
+
+                infoSpDiv.appendChild(animalName);
+                infoSpDiv.appendChild(animalDescription);
+                
+                const btnMoreDiv = document.createElement('div');
+                btnMoreDiv.className = 'btnMore';
+
+                const moreLink = document.createElement('a');
+                moreLink.href = `infoReptil.html?id=${newAnimal._id}`;
+
+                const moreButton = document.createElement('button');
+                moreButton.className = 'btn';
+                moreButton.textContent = 'More';
+
+                moreLink.appendChild(moreButton);
+                btnMoreDiv.appendChild(moreLink);
+
+                specieDiv.appendChild(infoSpDiv);
+                specieDiv.appendChild(btnMoreDiv);
+                speciesContainer.appendChild(specieDiv);
+            }
+        }
+    }
+
+    loadAnimals();
+  </script>
+
+</body>
+</html>
