@@ -31,7 +31,7 @@ body {
     display: flex;
     justify-content: space-evenly;
     padding-top: 20px;
-    position: relative; /* Importante para el posic |ionamiento absoluto del formulario */
+    position: relative; /* Importante para el posicionamiento absoluto del formulario */
 }
 
 .header a {
@@ -161,6 +161,7 @@ body {
     letter-spacing: 1px;
     transition: all 0.5s ease;
     font-family: "Bree Serif", serif;
+    font-weight: 100;
     color: white;
   }
   
