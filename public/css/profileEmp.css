@@ -1,0 +1,230 @@
+@import url('https://fonts.cdnfonts.com/css/gagalin');
+/*slogan font-family: 'Gagalin', sans-serif;*/
+@import url('https://fonts.googleapis.com/css2?family=Bree+Serif&display=swap');
+/*titles     font-family: "Bree Serif", serif; font-weight: 100;*/
+@import url('https://fonts.googleapis.com/css2?family=Questrial&display=swap');
+/*text     font-family: "Questrial", sans-serif; 24px*/
+
+* {
+    margin: 0;
+}
+
+header {
+    background-color: #E393FF;
+    height: 80px;
+    display: flex;
+    align-items: center;
+}
+
+header img {
+    margin-left: 50px;
+    height: 50px;
+}
+
+.contain-title {
+    background-color: #D55DFF;
+    height: 130px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.title {
+    font-family: "Bree Serif", serif;
+    font-size: 38px;
+    color: white;
+    letter-spacing: 2px;
+}
+
+.third{
+    background-color: #CE41FC;
+    height: 65px;
+}
+
+.form-container {
+    background: linear-gradient(180deg, rgba(199,39,255,1) 11%, rgba(167,23,255,1) 49%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 55px;
+}
+
+.formulario {
+    width: 100%;
+    max-width: 400px;
+}
+
+.part {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.part .input {
+    width: 380px;
+    height: 25px;
+    text-align: center;
+    padding: 8px;
+    border-radius: 20px;
+    border: 1.5px solid lightgrey;
+    outline: none;
+    transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+    box-shadow: 0px 0px 20px -18px;
+    margin: 12px;
+    opacity: 75%;
+    font-family: "Questrial", sans-serif;
+    font-size: 20px;
+}
+
+.part .input:hover {
+    box-shadow: 0px 0px 13px rgb(59, 59, 59);
+}
+
+.form-button {
+    text-align: center;
+    margin-top: 30px;
+}
+.submit-button {
+    border-radius: 50px;
+    cursor: pointer;
+    border: 0;
+    background-color: #EB4103;
+    font-size: 20px;
+    transition: all 0.5s ease;
+    font-family: "Bree Serif", serif;
+    color: white;
+    width: 310px;
+    height: 48px;
+  }
+  
+.submit-button:hover {
+    background-color: hsl(47, 100%, 58%);
+    color: hsl(0, 0%, 100%);
+    box-shadow: rgb(255, 207, 39) 0px 0px 18px 0px;
+  }
+  
+.submit-button:active {
+    background-color: hsl(47, 100%, 58%);
+    color: hsl(0, 0%, 100%);
+    box-shadow: rgb(255, 207, 39) 0px 0px 18px 0px;
+    transform: translateY(10px);
+    transition: 100ms;
+  }
+
+/*
+* {
+    margin: 0;
+}
+
+header {
+    background-color: #E393FF;
+    height: 70px;
+    display: flex;
+    align-items: center;
+}
+
+header img {
+    margin-left: 50px;
+    height: 50px;
+}
+
+.contain-title {
+    background-color: #D55DFF;
+    height: 90px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.title {
+    font-family: "Bree Serif", serif;
+    font-size: 37px;
+    color: white;
+    letter-spacing: 2px;
+}
+
+.third {
+    background-color: #CE41FC;
+    height: 65px;
+}
+
+.form-container {
+    background: linear-gradient(180deg, rgba(199,39,255,1) 11%, rgba(167,23,255,1) 49%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px;
+ }
+
+.formulario {
+    width: 100%;
+    max-width: 400px;
+}
+
+.part {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.part .input {
+    width: 380px;
+    height: 40px;
+    text-align: center;
+    padding: 8px;
+    border-radius: 20px;
+    border: 1.5px solid lightgrey;
+    outline: none;
+    transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+    box-shadow: 0px 0px 20px -18px;
+    margin: 12px;
+    opacity: 75%;
+    font-family: "Questrial", sans-serif;
+    font-size: 20px;
+}
+
+.part .input:hover {
+    border: 2px solid lightgrey;
+    box-shadow: 0px 0px 20px -17px;
+}
+
+.part .input:active {
+    transform: scale(0.95);
+}
+
+.part .input:focus {
+    border: 2px solid grey;
+}
+
+.form-button {
+    text-align: center;
+}
+.submit-button {
+    border-radius: 50px;
+    cursor: pointer;
+    border: 0;
+    background-color: #EB4103;
+    font-size: 20px;
+    transition: all 0.5s ease;
+    font-family: "Bree Serif", serif;
+    color: white;
+    width: 310px;
+    height: 40px;
+  }
+  
+.submit-button:hover {
+    background-color: hsl(47, 100%, 58%);
+    color: hsl(0, 0%, 100%);
+    box-shadow: rgb(255, 207, 39) 0px 0px 18px 0px;
+  }
+  
+.submit-button:active {
+    background-color: hsl(47, 100%, 58%);
+    color: hsl(0, 0%, 100%);
+    box-shadow: rgb(255, 207, 39) 0px 0px 18px 0px;
+    transform: translateY(10px);
+    transition: 100ms;
+  }*/
