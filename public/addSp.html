@@ -22,11 +22,18 @@
                 </div>
                 <div class="second-part">
                     <div class="date">
-                        <input class="input-date" name="fecha_nacimiento" type="date" placeholder="Date of Birth" required>
-                        <input class="input-date" name="fecha_arrivo" type="date" placeholder="Arrival Date" required>
+                        <div class="inputDate">
+                            <h1>Date of Birth</h1>
+                            <input class="input-date" name="fecha_nacimiento" type="date" placeholder="Date of Birth" required>    
+                        </div>
+                        <div class="inputDate">
+                            <h1>Arrival Date</h1>
+                            <input class="input-date" name="fecha_arrivo" type="date" placeholder="Arrival Date" required>
+                        </div>
                     </div>
+
                     <div class="zona">
-                        <select class="input" name="zona" required>
+                        <select class="inputZone" name="zona" required>
                             <option value="" disabled selected>Select Zone</option>
                             <option value="Reptilis">Reptilis</option>
                             <option value="Aquatic">Aquatic</option>
@@ -34,6 +41,7 @@
                             <option value="Land">Land</option>
                         </select>
                     </div>
+
                     <div class="edad">
                         <h1>Age of the animal will be calculated automatically</h1>
                     </div>
