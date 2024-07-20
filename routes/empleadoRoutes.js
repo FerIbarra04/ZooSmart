@@ -2,12 +2,12 @@ const express = require('express');
 const router = express.Router();
 const Empleado = require('../models/Empleado');
 
-// Ruta para crear un empleado
+// Crear un empleado
 router.post('/create-employee', async (req, res) => {
   try {
     const { name, birthdate, email, password, zone, dateAdded } = req.body;
     const adminId = req.session.user.id;
-    const nameZoo = req.session.user.zoo_name; // Corregido aquí
+    const nameZoo = req.session.user.zoo_name;
 
     // Generar un nuevo ID para el empleado
     const lastEmpleado = await Empleado.findOne().sort({ id: -1 });
@@ -30,15 +30,15 @@ router.post('/create-employee', async (req, res) => {
 
     // Enviar respuesta al cliente
     res.status(201).json({ message: 'Empleado creado exitosamente', empleado: newEmpleado });
-
   } catch (error) {
     res.status(500).json({ message: 'Error al crear empleado', error });
   }
 });
 
+// Iniciar sesión de empleado
 router.post('/login', async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { email, password, isMobileApp } = req.body;
 
     // Buscar empleado por email y contraseña
     const empleado = await Empleado.findOne({ email: email, contraseña: password });
@@ -57,12 +57,15 @@ router.post('/login', async (req, res) => {
       };
 
       // Enviar respuesta de éxito al cliente
-      res.status(200).json({ message: 'Inicio de sesión exitoso', user: req.session.employee });
+      if (isMobileApp) {
+        res.status(200).json({ message: 'Inicio de sesión exitoso', user: req.session.employee });
+      } else {
+        res.redirect('/HomeEmployee.html');
+      }
     } else {
       // Enviar respuesta si las credenciales son incorrectas
       res.status(401).json({ message: 'Correo o contraseña incorrectos' });
     }
-
   } catch (error) {
     // Manejar errores internos del servidor
     res.status(500).json({ message: 'Error al iniciar sesión', error });
@@ -78,12 +81,31 @@ router.get('/current-employee', (req, res) => {
   }
 });
 
+// Ruta para obtener empleados por zona
 router.get('/zone/:zona', async (req, res) => {
   try {
-      const empleados = await Empleado.find({ zona: req.params.zona });
-      res.json(empleados);
+    const empleados = await Empleado.find({ zona: req.params.zona });
+    res.json(empleados);
   } catch (error) {
-      res.status(500).json({ message: 'Error al obtener empleados', error });
+    res.status(500).json({ message: 'Error al obtener empleados', error });
+  }
+});
+
+//Ruta para que en el inicio de sesion le salgan sus animales
+
+const Animal = require('../models/Animal'); // Asegúrate de tener el modelo de Animal
+
+router.get('/animales-zona', async (req, res) => {
+  if (!req.session.employee) {
+    return res.status(401).json({ message: 'No autorizado' });
+  }
+
+  try {
+    const zona = req.session.employee.zone;
+    const animales = await Animal.find({ zona: zona });
+    res.json(animales);
+  } catch (error) {
+    res.status(500).json({ message: 'Error al obtener animales', error });
   }
 });
 

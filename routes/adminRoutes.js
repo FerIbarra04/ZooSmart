@@ -31,8 +31,6 @@ router.post('/create-account', async (req, res) => {
       ciudad: city,
       direccion: address,
       admin_id: newAdminId,
-      especies: [],
-      zonas: []
     });
 
     await newZoo.save();

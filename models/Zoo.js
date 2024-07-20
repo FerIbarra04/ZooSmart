@@ -7,8 +7,6 @@ const ZooSchema = new mongoose.Schema({
   pais: { type: String, required: true },
   direccion: { type: String, required: true },
   admin_id: { type: Number, required: true, ref: 'Admins' },
-  especies: [{ type: Number, ref: 'Animals' }],
-  zonas: [String],
 }, {
   collection: 'Zoos' // Nombre de la colección en MongoDB
 });

@@ -11,7 +11,7 @@ const empleadoRoutes = require('./routes/empleadoRoutes');
 const animalRoutes = require('./routes/animalRoutes');
 
 const app = express();
-const port = 3000;
+const port = 3000; 
 
 // Configura CORS para permitir solicitudes desde la app
 app.use(cors({

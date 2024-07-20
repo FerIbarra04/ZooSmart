@@ -22,25 +22,66 @@
             </a>
         </div>
         <!--El nombre del usuario por JavaScript-->
-        <h1>Welcome Employee</h1>
-        <h1 id="welcome-message"></h1>
+        <h1 id="welcome-message">Welcome Employee</h1>
     </div>
-    <section class="container-species">
-        <div class="specie">
-            <div class="infoSp">
-                <!--En el h1 va la especie-->
-                <h1>Hormiga</h1>
-                <!--En el p va la descripcion del animal-->
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi, vel consequatur. Libero harum cumque blanditiis quisquam explicabo praesentium ex, dolore ipsa molestias, commodi animi optio aliquam labore, totam nisi et.
-                </p>
-            </div>
-            <div class="btnMore">
-                <button class="btn">
-                    More
-                </button>
-            </div>
-        </div>
+    <section class="container-species" id="species-container">
+        <!-- Aquí se llenarán dinámicamente las especies -->
     </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async function() {
+            try {
+                // Obtener datos del empleado
+                const responseEmployee = await fetch('/api/empleado/current-employee');
+                const employeeData = await responseEmployee.json();
+
+                if (employeeData) {
+                    document.getElementById('welcome-message').textContent = `Welcome Employee ${employeeData.name}`;
+                }
+
+                // Obtener animales de la zona del empleado
+                const responseAnimals = await fetch('/api/empleado/animales-zona');
+                const animalsData = await responseAnimals.json();
+
+                if (animalsData.length > 0) {
+                    const speciesContainer = document.getElementById('species-container');
+                    animalsData.forEach(animal => {
+                        const specieElement = document.createElement('div');
+                        specieElement.classList.add('specie');
+                        
+                        const infoSpElement = document.createElement('div');
+                        infoSpElement.classList.add('infoSp');
+                        
+                        const h1Element = document.createElement('h1');
+                        h1Element.textContent = animal.nombre;
+                        
+                        const pElement = document.createElement('p');
+                        pElement.textContent = `Zone: ${animal.zona}`;
+                        
+                        infoSpElement.appendChild(h1Element);
+                        infoSpElement.appendChild(pElement);
+                        
+                        const btnMoreElement = document.createElement('div');
+                        btnMoreElement.classList.add('btnMore');
+                        
+                        const buttonElement = document.createElement('button');
+                        buttonElement.classList.add('btn');
+                        buttonElement.textContent = 'More';
+                        
+                        btnMoreElement.appendChild(buttonElement);
+                        
+                        specieElement.appendChild(infoSpElement);
+                        specieElement.appendChild(btnMoreElement);
+                        
+                        speciesContainer.appendChild(specieElement);
+                    });
+                } else {
+                    document.getElementById('species-container').textContent = 'No animals assigned to your zone.';
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        });
+    </script>
 </body>
 </html>
