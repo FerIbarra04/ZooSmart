@@ -79,7 +79,7 @@ h1{
 }
 
 
-
+/*CONTENEDOR DE LA INFORMACION DE LA ESPECIE*/
 .container-species{
     display: flex;
     flex-direction: column;
