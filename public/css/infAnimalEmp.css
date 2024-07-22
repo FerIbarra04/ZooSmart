@@ -1,0 +1,112 @@
+@import url('https://fonts.cdnfonts.com/css/gagalin');
+/*slogan   font-family: 'Gagalin', sans-serif;*/
+@import url('https://fonts.googleapis.com/css2?family=Bree+Serif&display=swap');
+/*titles   font-family: "Bree Serif", serif; font-weight: 100; 34px*/
+@import url('https://fonts.googleapis.com/css2?family=Questrial&display=swap');
+/*text     font-family: "Questrial", sans-serif; 24px*/
+
+body{
+    margin: 0%;
+}
+header{
+    background: rgb(74,184,255);
+    background: linear-gradient(180deg, rgba(74,184,255,1) 5%, rgba(255,182,40,1) 50%, rgba(255,139,55,1) 70%);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 120px;
+}
+.atras{
+    height: 40px;
+    margin-left: 30px;
+    cursor: pointer;
+}
+.title{
+    font-family: "Bree Serif", serif;
+    font-size: 40px;
+    color: white;
+    font-weight: 130;
+}
+.logo{
+    height: 120px;
+    margin-right: 30px;
+}
+.container-inf{
+    display: flex;
+    flex-direction: row;
+}
+.dates{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.title-date{
+    font-family: "Bree Serif", serif; 
+    font-weight: 100;
+    font-size: 30px;
+    margin-left: 50px;
+}
+
+.infoDate{
+    font-family: "Questrial", sans-serif;
+    font-size: 22px;
+    text-align: center;
+    margin: 30px;
+}
+.cont-info-animal{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+.infor-animal{
+    margin-left: 50px;
+}
+.btn{
+    margin: 220px;
+}
+.titleInfo{
+    font-family: "Bree Serif", serif; 
+    font-weight: 100;
+    font-size: 32px;
+    margin: 0px 0px 10px 30px;
+}
+.titleInfoName{
+    font-family: "Bree Serif", serif; 
+    font-weight: 200;
+    font-size: 35px;
+    margin: 0px 0px 10px 30px;
+}
+.info{
+    font-family: "Questrial", sans-serif;
+    font-size: 19px;
+    text-align: justify;
+    margin: 0px 0px 40px 35px;
+}
+
+.button {
+    padding: 11px;
+    width: 160px;
+    border-radius: 50px;
+    cursor: pointer;
+    border: 0;
+    background-color: #F39219;
+    font-size: 20px;
+    transition: all 0.5s ease;
+    font-family: "Bree Serif", serif;
+    color: white;
+  }
+  
+.button:hover {
+    background-color: hsl(16deg 97% 47%);
+    color: hsl(0, 0%, 100%);
+    box-shadow: rgb(235 65 3) 0px 0px 18px 0px;
+  }
+  
+.button:active {
+    background-color: hsl(16deg 97% 47%);
+    color: hsl(0, 0%, 100%);
+    box-shadow: rgb(235 65 3) 0px 0px 18px 0px;
+    transform: translateY(10px);
+    transition: 100ms;
+  }
