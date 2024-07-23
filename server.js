@@ -4,6 +4,7 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const cors = require('cors');
+const cron = require('node-cron');
 
 const adminRoutes = require('./routes/adminRoutes');
 const zooRoutes = require('./routes/ZooRoutes');
@@ -60,6 +61,31 @@ app.get('/api/user', (req, res) => {
     res.status(401).send('No autorizado');
   } else {
     res.json(req.session.user);
+  }
+});
+
+// Actualizar edad de los animales diariamente
+cron.schedule('0 0 * * *', async () => {
+  try {
+      const animals = await Animal.find({});
+      const today = new Date();
+
+      for (const animal of animals) {
+          const birthdate = new Date(animal.fecha_nacimiento);
+          const age = today.getFullYear() - birthdate.getFullYear();
+          const monthDifference = today.getMonth() - birthdate.getMonth();
+          const dayDifference = today.getDate() - birthdate.getDate();
+          const years = age - (monthDifference < 0 || (monthDifference === 0 && dayDifference < 0) ? 1 : 0);
+          const months = (monthDifference + 12) % 12;
+          const days = Math.max(dayDifference, 0);
+
+          animal.edad = { años: years, meses: months, dias: days };
+          await animal.save();
+      }
+
+      console.log('Ages updated successfully');
+  } catch (error) {
+      console.error('Error updating ages:', error);
   }
 });
 

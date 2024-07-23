@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const Admin = require('../models/Admin');
 const Zoo = require('../models/Zoo');
+const Animal = require('../models/Animal');
+const Empleado = require('../models/Empleado');
 
 // Crear cuenta de admin
 router.post('/create-account', async (req, res) => {
@@ -86,6 +88,68 @@ router.post('/login', async (req, res) => {
     }
   } catch (error) {
     res.status(500).json({ message: 'Error al iniciar sesión', error });
+  }
+});
+
+// Obtener información de admin por ID
+router.get('/api/admin/:id', async (req, res) => {
+  try {
+    const adminId = req.params.id;
+    const admin = await Admin.findOne({ id: adminId });
+    const zoo = await Zoo.findOne({ admin_id: adminId });
+
+    if (!admin) {
+      return res.status(404).json({ message: 'Admin no encontrado' });
+    }
+
+    res.json({
+      id: admin.id,
+      name: admin.nombre,
+      email: admin.email,
+      zoo_name: admin.nombre_zoo,
+      country: zoo.pais,
+      state: zoo.estado,
+      city: zoo.ciudad,
+      address: zoo.direccion
+    });
+  } catch (error) {
+    res.status(500).json({ message: 'Error al obtener la información del admin', error });
+  }
+});
+
+
+// Eliminar cuenta de admin, zoo, animales y empleados
+router.delete('/:id', async (req, res) => {
+  try {
+    const adminId = req.params.id;
+
+    // Eliminar zoo asociado
+    const zooDeleted = await Zoo.findOneAndDelete({ admin_id: adminId });
+    if (!zooDeleted) {
+      return res.status(404).json({ message: 'Zoo no encontrado' });
+    }
+
+    // Eliminar animales asociados al zoo
+    const animalsDeleted = await Animal.deleteMany({ zona: zooDeleted.nombre });
+    if (animalsDeleted.deletedCount === 0) {
+      return res.status(404).json({ message: 'Animales no encontrados' });
+    }
+
+    // Eliminar empleados asociados al zoo
+    const employeesDeleted = await Empleado.deleteMany({ zoo_name: zooDeleted.nombre });
+    if (employeesDeleted.deletedCount === 0) {
+      return res.status(404).json({ message: 'Empleados no encontrados' });
+    }
+
+    // Eliminar admin
+    const adminDeleted = await Admin.findByIdAndDelete(adminId);
+    if (!adminDeleted) {
+      return res.status(404).json({ message: 'Admin no encontrado' });
+    }
+
+    res.json({ message: 'Cuenta y datos asociados eliminados correctamente' });
+  } catch (error) {
+    res.status(500).json({ message: 'Error al eliminar la cuenta', error });
   }
 });
 

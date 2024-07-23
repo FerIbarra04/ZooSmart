@@ -3,54 +3,110 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reptil Information</title>
+    <title>Animal Information</title>
     <link rel="stylesheet" href="css/infAnimalEmp.css">
 </head>
 <body>
     <header>
-        <a href="AquaticZone.html">
+        <a href="HomeEmployee.html">
             <img class="atras" src="img/atras.png">
         </a>
-        <!--NOMBRE DE LA ESPECIE EN H1-->
-        <h1 class="title">LEON</h1>
+        <h1 class="title" id="animal-name">Animal Name</h1>
         <img class="logo" src="img/logo.png">
     </header>
 
     <section class="container-inf">
         <div class="dates">
             <h1 class="title-date">Age:</h1>
-                <p class="infoDate"></p>
+            <p class="infoDate" id="animal-age"></p>
             <h1 class="title-date">Birthdate:</h1>
-                <p class="infoDate"></p>
+            <p class="infoDate" id="animal-birthdate"></p>
             <h1 class="title-date">Arrive Date:</h1>
-                <p class="infoDate"></p>
+            <p class="infoDate" id="animal-arrive-date"></p>
         </div>
     </section>
+
     <section class="cont-info-animal">
         <div class="infor-animal">
             <div>
-                <h1 class="titleInfoName">LEON</h1>
-                <p class="info">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti voluptatum dolore laudantium, in rerum architecto doloribus reprehenderit totam dignissimos adipisci! Reiciendis assumenda architecto repellendus ab eveniet. Accusantium voluptates vel numquam?
-                </p>
+                <h1 class="titleInfo">Description:</h1>
+                <p class="info" id="animal-description"></p>
             </div>
             <div>
                 <h1 class="titleInfo">Diet:</h1>
-                <p class="info">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti voluptatum dolore laudantium, in rerum architecto doloribus reprehenderit totam dignissimos adipisci! Reiciendis assumenda architecto repellendus ab eveniet. Accusantium voluptates vel numquam?
-                </p>
+                <textarea class="info" id="animal-diet"></textarea>
             </div>
             <div>
                 <h1 class="titleInfo">Additional Data:</h1>
-                <p class="info">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti voluptatum dolore laudantium, in rerum architecto doloribus reprehenderit totam dignissimos adipisci! Reiciendis assumenda architecto repellendus ab eveniet. Accusantium voluptates vel numquam?
-                </p>
+                <textarea class="info" id="animal-additional-data"></textarea>
             </div>
         </div>
         <div class="btn">
-            <button class="button">SAVE NEW INFO</button>
+            <button class="button" id="save-info-btn">SAVE NEW INFO</button>
         </div>
     </section>
-    
+
+    <script>
+    document.addEventListener('DOMContentLoaded', async function() {
+    try {
+        const urlParams = new URLSearchParams(window.location.search);
+        const animalId = urlParams.get('id');
+
+        // Obtener datos del animal
+        const response = await fetch(`/api/animal/${animalId}`);
+        if (!response.ok) {
+            throw new Error('Error al obtener los datos del animal');
+        }
+        const animalData = await response.json();
+
+        if (animalData) {
+            // Mostrar información básica del animal
+            document.getElementById('animal-name').textContent = animalData.nombre;
+            document.getElementById('animal-description').textContent = animalData.descripcion;
+            document.getElementById('animal-diet').value = animalData.dieta;
+            document.getElementById('animal-additional-data').value = animalData.info_adicional;
+
+            // Calcular y mostrar la edad actualizada
+            const birthdate = new Date(animalData.fecha_nacimiento);
+            const today = new Date();
+            const years = today.getFullYear() - birthdate.getFullYear() - (today.getMonth() < birthdate.getMonth() || (today.getMonth() === birthdate.getMonth() && today.getDate() < birthdate.getDate()) ? 1 : 0);
+            const months = (today.getMonth() + 12 - birthdate.getMonth()) % 12;
+            const days = Math.max(today.getDate() - birthdate.getDate(), 0);
+
+            document.getElementById('animal-age').textContent = `${years} years, ${months} months, ${days} days`;
+            document.getElementById('animal-birthdate').textContent = birthdate.toLocaleDateString();
+            document.getElementById('animal-arrive-date').textContent = new Date(animalData.fecha_arrivo).toLocaleDateString();
+        }
+
+        // Guardar información actualizada
+        document.getElementById('save-info-btn').addEventListener('click', async function() {
+            const updatedDiet = document.getElementById('animal-diet').value;
+            const updatedAdditionalData = document.getElementById('animal-additional-data').value;
+
+            const updateResponse = await fetch(`/api/animal/${animalId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    dieta: updatedDiet,
+                    info_adicional: updatedAdditionalData
+                })
+            });
+
+            if (updateResponse.ok) {
+                alert('Information updated successfully');
+            } else {
+                const errorData = await updateResponse.json();
+                alert(`Failed to update information: ${errorData.message}`);
+            }
+        });
+    } catch (error) {
+        console.error('Error:', error);
+    }
+});
+
+
+    </script>
 </body>
 </html>

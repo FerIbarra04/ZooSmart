@@ -21,12 +21,11 @@
                 </button>
             </a>
         </div>
-        <!--El nombre del usuario por JavaScript-->
+        <!-- El nombre del usuario por JavaScript -->
         <h1 id="welcome-message">Welcome Employee</h1>
     </div>
-    
     <section class="container-species" id="species-container">
-        <!-- Aquí se llenarán dinámicamente las especies -->
+        <!-- Aquí se llenarán dinámicamente los nombres de los animales -->
     </section>
 
     <script>
@@ -56,11 +55,7 @@
                         const h1Element = document.createElement('h1');
                         h1Element.textContent = animal.nombre;
                         
-                        const pElement = document.createElement('p');
-                        pElement.textContent = `Zone: ${animal.zona}`;
-                        
                         infoSpElement.appendChild(h1Element);
-                        infoSpElement.appendChild(pElement);
                         
                         const btnMoreElement = document.createElement('div');
                         btnMoreElement.classList.add('btnMore');
@@ -68,6 +63,9 @@
                         const buttonElement = document.createElement('button');
                         buttonElement.classList.add('btn');
                         buttonElement.textContent = 'More';
+                        buttonElement.onclick = () => {
+                            window.location.href = `infAnimalEmp.html?id=${animal._id}`;
+                        };
                         
                         btnMoreElement.appendChild(buttonElement);
                         
