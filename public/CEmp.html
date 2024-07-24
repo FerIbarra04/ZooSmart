@@ -99,6 +99,25 @@
               const emailPrefixInput = document.getElementById('emailPrefix');
               emailPrefixInput.value = emailPrefixInput.value.replace(/@.*/, '');
             }
+
+            document.getElementById('createEmployeeForm').addEventListener('submit', async function(event) {
+              event.preventDefault();
+              const formData = new FormData(this);
+              try {
+                const response = await fetch('/api/empleado/create-employee', {
+                  method: 'POST',
+                  body: formData
+                });
+                const result = await response.json();
+                if (response.ok) {
+                  window.location.href = result.redirect; // Redirige al home.html
+                } else {
+                  console.error('Error:', result.message);
+                }
+              } catch (error) {
+                console.error('Error al crear empleado:', error);
+              }
+            });
         </script>
             
     </main>

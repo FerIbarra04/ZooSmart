@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const Empleado = require('../models/Empleado');
 
-// Crear un empleado
 router.post('/create-employee', async (req, res) => {
   try {
     const { name, birthdate, email, password, zone, dateAdded } = req.body;
@@ -28,12 +27,19 @@ router.post('/create-employee', async (req, res) => {
 
     await newEmpleado.save();
 
-    // Enviar respuesta al cliente
-    res.status(201).json({ message: 'Empleado creado exitosamente', empleado: newEmpleado });
+    // Determina si se debe responder como JSON o redirigir
+    if (req.headers['user-agent'].includes('Mobile')) {  // Ejemplo para detectar app móvil
+      res.status(201).json({ message: 'Cuenta creada exitosamente', empleado: newEmpleado });
+    } else {
+      // Redirigir al cliente al home.html
+      res.redirect('/home.html');
+    }
   } catch (error) {
+    console.error('Error al crear empleado:', error); // Imprime el error en la consola
     res.status(500).json({ message: 'Error al crear empleado', error });
   }
 });
+
 
 // Iniciar sesión de empleado
 router.post('/login', async (req, res) => {

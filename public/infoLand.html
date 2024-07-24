@@ -23,6 +23,10 @@
             <h1 class="title-date">Arrive Date:</h1>
             <p class="infoDate" id="arriveDate"></p>
         </div>
+        <div class="container-employee">
+            <h1 class="titleEmp">Employee</h1>
+            <div class="employee" id="employeeList"></div>
+        </div>
     </section>
     <section class="container-inf-animal">
         <div>
@@ -60,18 +64,6 @@
                 document.getElementById('arriveDate').textContent = new Date(animal.fecha_arrivo).toLocaleDateString();
                 document.getElementById('animalDiet').textContent = animal.dieta;
                 document.getElementById('animalAdditionalData').textContent = animal.info_adicional;
-
-                 // Obtener empleados de la misma zona
-                 const employeeResponse = await fetch(`/api/empleado/zone/${animal.zona}`);
-                const employees = await employeeResponse.json();
-
-                const employeeList = document.getElementById('employeeList');
-                employees.forEach(emp => {
-                    const empDiv = document.createElement('div');
-                    empDiv.className = 'InfoEmp';
-                    empDiv.innerHTML = `<h1 class="name">${emp.nombre}</h1><img class="delete" src="img/delete.png">`;
-                    employeeList.appendChild(empDiv);
-                });
             }
         }
     document.getElementById('deleteButton').addEventListener('click', async () => {
