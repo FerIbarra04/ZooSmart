@@ -27,6 +27,7 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // Almacenar datos del administrador en sessionStorage después del inicio de sesión
             fetch('/api/user')
                 .then(response => {
                     if (response.status === 401) {
@@ -36,11 +37,24 @@
                     }
                 })
                 .then(user => {
+                    // Almacenar datos del usuario en sessionStorage
+                    sessionStorage.setItem('adminId', user.id);
+                    sessionStorage.setItem('adminName', user.name);
+                    sessionStorage.setItem('adminEmail', user.email);
+                    sessionStorage.setItem('zooName', user.zoo_name);
+                    sessionStorage.setItem('zooAddress', user.address);
+
+                    // Mostrar mensaje de bienvenida
                     document.getElementById('welcome-message').innerText = `Welcome ${user.name}`;
                 })
                 .catch(error => {
                     console.error('Error:', error);
                 });
+
+            // Limpiar sessionStorage al cerrar sesión
+            document.getElementById('logout-button').addEventListener('click', function() {
+                sessionStorage.clear();
+            });
         });
     </script>
 

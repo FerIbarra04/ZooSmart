@@ -17,7 +17,7 @@
     <div class="third">
         <!-- Aquí puedes agregar más información del administrador si es necesario -->
     </div>
-    <section class="form-container">
+    <section class="form-container">    
         <form id="admin-profile-form">
             <div class="formulario">
                 <div class="formParts">
@@ -37,50 +37,39 @@
         </form>
     </section>
     <script>
-        document.addEventListener('DOMContentLoaded', async function() {
-            try {
-                const adminId = sessionStorage.getItem('adminId'); // Obtén el ID del administrador actual almacenado en la sesión
+        document.addEventListener('DOMContentLoaded', function() {
+            // Obtener datos del administrador desde sessionStorage
+            const adminName = sessionStorage.getItem('adminName');
+            const adminEmail = sessionStorage.getItem('adminEmail');
+            const zooName = sessionStorage.getItem('zooName');
+            const zooAddress = sessionStorage.getItem('zooAddress');
 
-                if (!adminId) {
-                    console.error('Admin ID is not set in session storage.');
-                    return;
-                }
-
-                // Obtener datos del administrador y del zoo
-                const response = await fetch(`/api/admin/${adminId}`);
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-
-                const adminData = await response.json();
-
-                if (adminData) {
-                    document.getElementById('admin-name').value = adminData.name;
-                    document.getElementById('admin-email').value = adminData.email;
-                    document.getElementById('zoo-name').value = adminData.zoo_name;
-                    document.getElementById('zoo-address').value = adminData.address;
-                }
-
-                // Manejar la eliminación de la cuenta
-                document.getElementById('delete-account-btn').addEventListener('click', async function() {
-                    const confirmDelete = confirm('Are you sure you want to delete your account? This action cannot be undone.');
-                    if (confirmDelete) {
-                        const deleteResponse = await fetch(`/api/admin/${adminId}`, {
-                            method: 'DELETE'
-                        });
-
-                        if (deleteResponse.ok) {
-                            alert('Account deleted successfully');
-                            // Redirigir a la página de inicio de sesión o a otra página adecuada
-                            window.location.href = "index.html";
-                        } else {
-                            alert('Failed to delete account. Please try again.');
-                        }
-                    }
-                });
-            } catch (error) {
-                console.error('Error:', error);
+            if (adminName && adminEmail && zooName && zooAddress) {
+                document.getElementById('admin-name').value = adminName;
+                document.getElementById('admin-email').value = adminEmail;
+                document.getElementById('zoo-name').value = zooName;
+                document.getElementById('zoo-address').value = zooAddress;
             }
+
+            // Manejar la eliminación de la cuenta
+            document.getElementById('delete-account-btn').addEventListener('click', async function() {
+                const confirmDelete = confirm('Are you sure you want to delete your account? This action cannot be undone.');
+                if (confirmDelete) {
+                    const adminId = sessionStorage.getItem('adminId');
+                    const deleteResponse = await fetch(`/api/admin/${adminId}`, {
+                        method: 'DELETE'
+                    });
+
+                    if (deleteResponse.ok) {
+                        alert('Account deleted successfully');
+                        sessionStorage.clear();
+                        // Redirigir a la página de inicio de sesión o a otra página adecuada
+                        window.location.href = "index.html";
+                    } else {
+                        alert('Failed to delete account. Please try again.');
+                    }
+                }
+            });
         });
     </script>
 </body>

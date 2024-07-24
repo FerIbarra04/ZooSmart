@@ -78,6 +78,11 @@ router.post('/login', async (req, res) => {
         address: zoo.direccion
       };
 
+      // Almacenar adminId en sessionStorage
+      if (!isMobileApp) {
+        res.cookie('adminId', admin.id, { httpOnly: true }); // Almacenar el ID en una cookie para acceder desde el front-end
+      }
+
       if (isMobileApp) {
         res.status(200).json({ message: 'Inicio de sesión exitoso', user: req.session.user });
       } else {
@@ -90,6 +95,7 @@ router.post('/login', async (req, res) => {
     res.status(500).json({ message: 'Error al iniciar sesión', error });
   }
 });
+
 
 // Obtener información de admin por ID
 router.get('/api/admin/:id', async (req, res) => {

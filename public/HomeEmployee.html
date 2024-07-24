@@ -15,7 +15,7 @@
                     Logout
                 </button>
             </a>
-            <a href="profile.html">
+            <a href="profileEmployee.html">
                 <button>
                     Profile
                 </button>
@@ -23,6 +23,7 @@
         </div>
         <!-- El nombre del usuario por JavaScript -->
         <h1 id="welcome-message">Welcome Employee</h1>
+        <h2 id="assigned-zone">Your assigned zone is: </h2> <!-- Nuevo elemento para la zona asignada -->
     </div>
     <section class="container-species" id="species-container">
         <!-- Aquí se llenarán dinámicamente los nombres de los animales -->
@@ -37,6 +38,7 @@
 
                 if (employeeData) {
                     document.getElementById('welcome-message').textContent = `Welcome Employee ${employeeData.name}`;
+                    document.getElementById('assigned-zone').textContent = `Your assigned zone is: ${employeeData.zone}`; // Mostrar la zona asignada
                 }
 
                 // Obtener animales de la zona del empleado

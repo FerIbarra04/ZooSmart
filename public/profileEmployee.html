@@ -8,29 +8,71 @@
 </head>
 <body>
     <header>
-        <img src="img/atras.png" alt="Back">
+        <a href="HomeEmployee.html"><img src="img/atras.png" alt="Back"></a>
     </header>
     <div class="contain-title">
         <h1 class="title">Profile</h1>
         <h1 class="title">Employee</h1>
     </div>
     <div class="third">
-        
     </div>
     <section class="form-container">
         <form>
             <div class="formulario">
                 <div class="part">
-                    <input class="input" name="name" type="text" placeholder="Name" required>
-                    <input class="input" name="email" type="email" placeholder="Email" required>
-                    <input class="input" name="name_zoo" type="text" placeholder="Name Zoo" required>
-                    <input class="input" name="zone" type="text" placeholder="Zone" required>
-                    <div class="form-button">
-                        <input class="submit-button" type="submit" value="DELETED ACCOUNT">
-                    </div>
+                    <input class="input" id="nombre" name="nombre" type="text" placeholder="nombre" required>
+                    <input class="input" id="email" name="email" type="email" placeholder="Email" required>
+                    <input class="input" id="nombre_zoo" name="nombre_zoo" type="text" placeholder="nombre_zoo" required>
+                    <input class="input" id="zona" name="zona" type="text" placeholder="zona" required>
+                    <button class="submit-button" type="button" id="delete-account">Delete Account</button>
                 </div>
             </div>
         </form>
     </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async function() {
+            try {
+                // Obtener datos del empleado
+                const response = await fetch('/api/empleado/current-employee');
+                const employeeData = await response.json();
+
+                if (employeeData) {
+                    // Rellenar los campos con los datos del empleado
+                    document.getElementById('nombre').value = employeeData.name;
+                    document.getElementById('email').value = employeeData.email;
+                    document.getElementById('nombre_zoo').value = employeeData.nameZoo;
+                    document.getElementById('zona').value = employeeData.zone;
+
+                    // Agregar event listener al botón de eliminar cuenta
+                    document.getElementById('delete-account').addEventListener('click', async function() {
+                        const confirmation = confirm('Are you sure you want to delete your account?');
+                        if (confirmation) {
+                            try {
+                                const deleteResponse = await fetch(`/api/empleado/delete-employee/${employeeData.id}`, {
+                                    method: 'DELETE',
+                                });
+
+                                if (deleteResponse.ok) {
+                                    alert('Account deleted successfully.');
+                                    window.location.href = 'index.html'; // Redirigir al usuario a la página de inicio de sesión
+                                } else {
+                                    const errorData = await deleteResponse.json();
+                                    alert(`Error: ${errorData.message}`);
+                                }
+                            } catch (error) {
+                                console.error('Error:', error);
+                                alert('An error occurred while deleting the account.');
+                            }
+                        }
+                    });
+                } else {
+                    console.error('No se pudieron obtener los datos del empleado');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        });
+    </script>
 </body>
 </html>

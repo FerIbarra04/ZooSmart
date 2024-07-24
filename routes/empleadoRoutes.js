@@ -91,6 +91,25 @@ router.get('/zone/:zona', async (req, res) => {
   }
 });
 
+// Eliminar un empleado
+router.delete('/delete-employee/:id', async (req, res) => {
+  try {
+    const empleadoId = req.params.id;
+    
+    // Eliminar empleado de la base de datos
+    const result = await Empleado.deleteOne({ id: empleadoId });
+
+    if (result.deletedCount > 0) {
+      res.status(200).json({ message: 'Empleado eliminado exitosamente' });
+    } else {
+      res.status(404).json({ message: 'Empleado no encontrado' });
+    }
+  } catch (error) {
+    res.status(500).json({ message: 'Error al eliminar empleado', error });
+  }
+});
+
+
 //Ruta para que en el inicio de sesion le salgan sus animales
 
 const Animal = require('../models/Animal'); // Asegúrate de tener el modelo de Animal
