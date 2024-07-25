@@ -32,7 +32,6 @@ body, html {
     font-size: 45px;
     color: white;
 }
-
 .header hr {
     border: 2px solid white;
 } 
@@ -40,9 +39,9 @@ body, html {
     display: flex;
     align-items: center;
     flex-direction: column;
-    justify-content: center;
+    align-content: center;
     position: fixed;
-    top: 56%;
+    top: 58%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 9999; /* Coloca el formulario en la capa superior */
@@ -85,12 +84,14 @@ form{
   .input:focus {
     border: 2px solid grey;
   }
+
   .v-line{
     border-left: solid #ffffff;
-    height: 350px;
+    height: 450px;
     left: 50%;
     position: absolute;
    }
+
   .PEC{
     display: flex;
     flex-direction: row;
@@ -129,7 +130,7 @@ form{
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 50px;
+    margin-top: 10px;
   }
   .nextBtn{
     border-radius: 50px;

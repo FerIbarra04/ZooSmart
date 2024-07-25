@@ -12,27 +12,30 @@
         <hr>
     </header>
     <main class="form-container">
-        <!-- Formulario para crear cuenta -->
-        <form id="adminForm" action="/api/admin/create-account" method="POST">
-            <div class="part">
-                <h2>Admin Information</h2>
-                <input class="input" name="name" type="text" placeholder="Name" required>
-                <input class="input" name="email" type="email" placeholder="Email" required>
-                <input class="input" name="password" type="password" placeholder="Password" required>
-            </div>
-            <div class="v-line"></div>
-            <div class="part">
-                <h2>Zoo Information</h2>
-                <input class="input" name="nameZoo" type="text" placeholder="Name Zoo" required>
-                <input class="input" name="country" type="text" placeholder="Country" required>
-                <input class="input" name="state" type="text" placeholder="State" required>
-                <input class="input" name="city" type="text" placeholder="City" required>
-                <input class="input" name="address" type="text" placeholder="Address (street number and location)" required>
-            </div>
-            <div class="btnNxt">
-                <button class="nextBtn" type="submit">CREATE</button>
-            </div>
-        </form>
+        <div>
+            <form id="adminForm" action="/api/admin/create-account" method="POST">
+                <div class="part">
+                    <h2>Admin Information</h2>
+                    <input class="input" name="name" type="text" placeholder="Name" required>
+                    <input class="input" name="email" type="email" placeholder="Email" required>
+                    <input class="input" name="password" type="password" placeholder="Password" required>
+                </div>
+                
+                <div class="v-line"></div>
+                
+                <div class="part">
+                    <h2>Zoo Information</h2>
+                    <input class="input" name="nameZoo" type="text" placeholder="Name Zoo" required>
+                    <input class="input" name="country" type="text" placeholder="Country" required>
+                    <input class="input" name="state"   type="text" placeholder="State" required>
+                    <input class="input" name="city"    type="text" placeholder="City" required>
+                    <input class="input" name="address" type="text" placeholder="Address (street number and location)" required>
+                </div>
+        </div>
+                <div class="btnNxt">
+                    <button class="nextBtn" type="submit">CREATE</button>
+                </div>
+            </form>
     </main>
     <div class="background-image-container">
         <img src="img/fondo_CAcc.png" class="background-image">
