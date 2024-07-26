@@ -10,13 +10,14 @@ const adminRoutes = require('./routes/adminRoutes');
 const zooRoutes = require('./routes/ZooRoutes');
 const empleadoRoutes = require('./routes/empleadoRoutes');
 const animalRoutes = require('./routes/animalRoutes');
+const testRoutes = require('./routes/testRoutes'); //pruebas api
 
 const app = express();
-const port = 3000; 
+const port = 3000;  
 
-// Configura CORS para permitir solicitudes desde la app
 app.use(cors({
-  origin: '*', // Puedes cambiar esto a la URL de tu app en producción
+  origin: '*', // Permitir todas las solicitudes desde cualquier origen
+  credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
@@ -54,6 +55,14 @@ app.use('/api/admin', adminRoutes);
 app.use('/api/zoo', zooRoutes);
 app.use('/api/empleado', empleadoRoutes);
 app.use('/api/animal', animalRoutes);
+app.use('/api/test', testRoutes);
+
+
+
+// Ruta PRUEBA API
+app.get('/api/test', (req, res) => {
+  res.send('La API está funcionando correctamente!');
+});
 
 //ruta para obtener los datos del usuario
 app.get('/api/user', (req, res) => {
