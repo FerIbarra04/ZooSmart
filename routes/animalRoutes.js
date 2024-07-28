@@ -1,12 +1,12 @@
 const express = require('express');
-const Animal = require('../models/Animal');
 const router = express.Router();
+const Animal = require('../models/Animal');
 const Zoo = require('../models/Zoo');
+const mongoose = require('mongoose');  // Importa mongoose para validar ObjectId
 
 // Crear un nuevo animal
 router.post('/create-animal', async (req, res) => {
   try {
-    // Verificar que el usuario esté autenticado
     if (!req.session.user) {
       return res.status(401).json({ error: 'Usuario no autenticado' });
     }
@@ -39,7 +39,6 @@ router.post('/create-animal', async (req, res) => {
 
     await newAnimal.save();
 
-    // Redirigir a la página de la zona correspondiente
     res.status(201).json({ url: `${zona}Zone.html`, animal: newAnimal });
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -51,9 +50,9 @@ router.get('/byZoo', async (req, res) => {
   if (!req.session.user) {
     return res.status(401).send('No autorizado');
   }
-  
+
   const zooName = req.session.user.zoo_name;
-  
+
   try {
     const animals = await Animal.find({ zoo_name: zooName });
     res.json(animals);
@@ -65,25 +64,20 @@ router.get('/byZoo', async (req, res) => {
 // Obtener un animal por ID
 router.get('/:id', async (req, res) => {
   try {
-    const animal = await Animal.findById(req.params.id);
-    if (!animal) {
-      return res.status(404).json({ message: 'Animal no encontrado' });
-    }
-    res.json(animal);
-  } catch (error) {
-    res.status(500).json({ message: 'Error al obtener el animal', error });
-  }
-});
+    const animalId = req.params.id;
 
-// Obtener un animal por ID
-router.get('/animal/:id', async (req, res) => {
-  try {
-    const animal = await Animal.findOne({ id: req.params.id }); // Ajuste de findById a findOne con id
+    // Verifica si el ID es un ObjectId válido
+    if (!mongoose.Types.ObjectId.isValid(animalId)) {
+      return res.status(400).json({ message: 'ID inválido' });
+    }
+
+    const animal = await Animal.findById(animalId);
     if (!animal) {
       return res.status(404).json({ message: 'Animal no encontrado' });
     }
     res.json(animal);
   } catch (error) {
+    console.error('Error al obtener el animal:', error);
     res.status(500).json({ message: 'Error al obtener el animal', error });
   }
 });
@@ -94,39 +88,41 @@ router.put('/:id', async (req, res) => {
     const { dieta, info_adicional } = req.body;
     const animalId = req.params.id;
 
-    // Obtener el animal actual
+    if (!mongoose.Types.ObjectId.isValid(animalId)) {
+      return res.status(400).json({ message: 'ID inválido' });
+    }
+
     const animal = await Animal.findById(animalId);
     if (!animal) {
       return res.status(404).json({ message: 'Animal no encontrado' });
     }
 
-    // Calcular la edad actualizada
     const birthdate = new Date(animal.fecha_nacimiento);
     const today = new Date();
     const years = today.getFullYear() - birthdate.getFullYear() - (today.getMonth() < birthdate.getMonth() || (today.getMonth() === birthdate.getMonth() && today.getDate() < birthdate.getDate()) ? 1 : 0);
     const months = (today.getMonth() + 12 - birthdate.getMonth()) % 12;
     const days = Math.max(today.getDate() - birthdate.getDate(), 0);
 
-    // Actualizar los datos del animal, incluyendo la edad
     animal.dieta = dieta || animal.dieta;
     animal.info_adicional = info_adicional || animal.info_adicional;
     animal.edad = { años: years, meses: months, dias: days };
 
-    // Guardar los cambios en la base de datos
     await animal.save();
 
-    // Responder con el animal actualizado
     res.json(animal);
   } catch (error) {
     res.status(500).json({ message: 'Error al actualizar la información del animal', error });
   }
 });
 
-
 // Eliminar animal
 router.delete('/:id', async (req, res) => {
   try {
     const { id } = req.params;
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ message: 'ID inválido' });
+    }
+
     await Animal.findByIdAndDelete(id);
     res.status(200).send('Animal eliminado correctamente');
   } catch (error) {
@@ -145,7 +141,7 @@ const calcularEdadDetallada = (fechaNacimiento) => {
 
   if (dias < 0) {
     meses--;
-    dias += new Date(hoy.getFullYear(), hoy.getMonth(), 0).getDate(); // Último día del mes anterior
+    dias += new Date(hoy.getFullYear(), hoy.getMonth(), 0).getDate();
   }
 
   if (meses < 0) {
@@ -155,5 +151,89 @@ const calcularEdadDetallada = (fechaNacimiento) => {
 
   return { años, meses, dias };
 };
+
+//API funcionesssssss
+
+// Obtener animales por zoológico y zona (no requiere autenticación)
+router.get('/byZone/:zona', async (req, res) => {
+  const zona = req.params.zona;
+
+  try {
+    const animals = await Animal.find({ zona: zona });
+    res.json(animals);
+  } catch (error) {
+    res.status(500).json({ message: 'Error al obtener animales', error });
+  }
+});
+
+// Nuevo endpoint para obtener un animal por ID numérico
+router.get('/byId/:id', async (req, res) => {
+  try {
+    const animalId = parseInt(req.params.id, 10);
+
+    if (isNaN(animalId)) {
+      return res.status(400).json({ message: 'ID inválido' });
+    }
+
+    const animal = await Animal.findOne({ id: animalId });
+    if (!animal) {
+      return res.status(404).json({ message: 'Animal no encontrado' });
+    }
+    res.json(animal);
+  } catch (error) {
+    console.error('Error al obtener el animal:', error);
+    res.status(500).json({ message: 'Error al obtener el animal', error });
+  }
+});
+
+// Convertir un ID numérico a ObjectId
+const findObjectIdByNumericId = async (numericId) => {
+  const animal = await Animal.findOne({ id: numericId });
+  if (!animal) {
+    throw new Error('Animal no encontrado');
+  }
+  return animal._id;
+};
+
+// Actualizar información del animal con ID numérico
+router.put('/updateAnimalInfo/:id', async (req, res) => {
+  try {
+    const { dieta, info_adicional } = req.body;
+    const numericId = req.params.id;
+
+    console.log('Received ID:', numericId); // Debugging line
+    console.log('Received body:', req.body); // Debugging line
+
+    let objectId;
+    try {
+      objectId = await findObjectIdByNumericId(numericId);
+    } catch (error) {
+      return res.status(404).json({ message: 'Animal no encontrado' });
+    }
+
+    const animal = await Animal.findById(objectId);
+    if (!animal) {
+      console.error('Animal not found for ID:', objectId); // Debugging line
+      return res.status(404).json({ message: 'Animal no encontrado' });
+    }
+
+    const birthdate = new Date(animal.fecha_nacimiento);
+    const today = new Date();
+    const years = today.getFullYear() - birthdate.getFullYear() - (today.getMonth() < birthdate.getMonth() || (today.getMonth() === birthdate.getMonth() && today.getDate() < birthdate.getDate()) ? 1 : 0);
+    const months = (today.getMonth() + 12 - birthdate.getMonth()) % 12;
+    const days = Math.max(today.getDate() - birthdate.getDate(), 0);
+
+    animal.dieta = dieta || animal.dieta;
+    animal.info_adicional = info_adicional || animal.info_adicional;
+    animal.edad = { años: years, meses: months, dias: days };
+
+    await animal.save();
+
+    res.json(animal);
+  } catch (error) {
+    console.error('Error updating animal info:', error); // Debugging line
+    res.status(500).json({ message: 'Error al actualizar la información del animal', error });
+  }
+});
 
 module.exports = router;

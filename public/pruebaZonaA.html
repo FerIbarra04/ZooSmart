@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Obtener Animales de la Zona Reptilis</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <h1>Obtener Animales de la Zona Reptilis</h1>
+
+  <h2>Resultados</h2>
+  <section id="speciesContainer"></section>
+
+  <script>
+    async function loadAnimalsByZone() {
+      const zona = 'Reptilis';
+      try {
+        const response = await fetch(`/api/animal/byZone/${zona}`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          credentials: 'include'
+        });
+
+        if (!response.ok) {
+          console.error('Error en la respuesta del servidor', response.status, response.statusText);
+          document.getElementById('speciesContainer').textContent = `Error: ${response.status} ${response.statusText}`;
+          return;
+        }
+
+        const contentType = response.headers.get('content-type');
+        if (!contentType || !contentType.includes('application/json')) {
+          console.error('La respuesta no es JSON', contentType);
+          document.getElementById('speciesContainer').textContent = 'Error: La respuesta no es JSON';
+          return;
+        }
+
+        const animals = await response.json();
+        const speciesContainer = document.getElementById('speciesContainer');
+
+        speciesContainer.innerHTML = ''; // Limpiar resultados anteriores
+
+        animals.forEach(animal => {
+          const specieDiv = document.createElement('div');
+          specieDiv.className = 'specie';
+
+          const infoSpDiv = document.createElement('div');
+          infoSpDiv.className = 'infoSp';
+
+          const animalName = document.createElement('h1');
+          animalName.textContent = animal.nombre;
+
+          const animalDescription = document.createElement('p');
+          animalDescription.textContent = animal.descripcion;
+
+          infoSpDiv.appendChild(animalName);
+          infoSpDiv.appendChild(animalDescription);
+          
+          const btnMoreDiv = document.createElement('div');
+          btnMoreDiv.className = 'btnMore';
+
+          const moreLink = document.createElement('a');
+          moreLink.href = `infoAnimal.html?id=${animal._id}`;
+
+          const moreButton = document.createElement('button');
+          moreButton.className = 'btn';
+          moreButton.textContent = 'More';
+
+          moreLink.appendChild(moreButton);
+          btnMoreDiv.appendChild(moreLink);
+
+          specieDiv.appendChild(infoSpDiv);
+          specieDiv.appendChild(btnMoreDiv);
+          speciesContainer.appendChild(specieDiv);
+        });
+      } catch (error) {
+        console.error('Error al obtener animales', error);
+        document.getElementById('speciesContainer').textContent = `Error: ${error.message}`;
+      }
+    }
+
+    // Llamar a la función loadAnimalsByZone cuando se cargue la página
+    window.onload = loadAnimalsByZone;
+  </script>
+</body>
+</html>

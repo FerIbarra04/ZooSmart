@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Empleado = require('../models/Empleado');
+const Animal = require('../models/Animal');
 
 router.post('/create-employee', async (req, res) => {
   try {
@@ -117,9 +118,6 @@ router.delete('/delete-employee/:id', async (req, res) => {
 
 
 //Ruta para que en el inicio de sesion le salgan sus animales
-
-const Animal = require('../models/Animal'); // Asegúrate de tener el modelo de Animal
-
 router.get('/animales-zona', async (req, res) => {
   if (!req.session.employee) {
     return res.status(401).json({ message: 'No autorizado' });
@@ -134,5 +132,17 @@ router.get('/animales-zona', async (req, res) => {
   }
 });
 
+//API
+// Obtener animales por zona (sin autenticación y sin verificación de zoológico)
+router.get('/animaleszona-API', async (req, res) => {
+  const { zona } = req.query;
+  try {
+    // Obtener los animales que pertenecen a la zona especificada
+    const animals = await Animal.find({ zona: zona });
+    res.json(animals);
+  } catch (error) {
+    res.status(500).json({ message: 'Error al obtener animales', error });
+  }
+});
 
 module.exports = router;

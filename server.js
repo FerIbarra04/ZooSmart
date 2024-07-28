@@ -16,11 +16,12 @@ const app = express();
 const port = 3000;  
 
 app.use(cors({
-  origin: '*', // Permitir todas las solicitudes desde cualquier origen
+  origin: ['http://localhost:8081', 'http://192.168.3.3:3000'], // '*' Permitir todas las solicitudes desde cualquier origen
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
+
 
 // Configura el middleware
 app.use(bodyParser.urlencoded({ extended: true }));
