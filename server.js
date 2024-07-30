@@ -16,7 +16,7 @@ const app = express();
 const port = 3000;  
 
 app.use(cors({
-  origin: ['http://localhost:8081', 'http://192.168.3.3:3000'], // '*' Permitir todas las solicitudes desde cualquier origen
+  origin: ['http://localhost:8081', ' 10.100.0.176:3000'], // AQUI CAMBIA LA SEGUNDA IP
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization']
@@ -63,6 +63,18 @@ app.use('/api/test', testRoutes);
 // Ruta PRUEBA API
 app.get('/api/test', (req, res) => {
   res.send('La API está funcionando correctamente!');
+});
+
+// Nueva ruta para enviar datos al ESP32
+app.post('/api/sendToESP32', async (req, res) => {
+  const { data } = req.body;
+  try {
+    const response = await axios.get(`http://ESP32_IP_ADDRESS/?data=${data}`);
+    res.json(response.data);
+  } catch (error) {
+    console.error('Error sending data to ESP32:', error);
+    res.status(500).send('Error sending data to ESP32');
+  }
 });
 
 //ruta para obtener los datos del usuario
