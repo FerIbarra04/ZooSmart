@@ -15,13 +15,6 @@ const testRoutes = require('./routes/testRoutes'); //pruebas api
 const app = express();
 const port = 3000;  
 
-app.use(cors({
-  origin: ['http://localhost:8081', 'http://10.100.0.176:3000'], // AQUI CAMBIA LA SEGUNDA IP
-  credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  allowedHeaders: ['Content-Type', 'Authorization']
-}));
-
 
 // Configura el middleware
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -37,7 +30,7 @@ app.use(session({
 }));
 
 // Conecta a la base de datos MongoDB
-mongoose.connect('mongodb://localhost:27017/ZooSmart', {
+mongoose.connect('mongodb+srv://Valeriaadr:vale123@cluster0.mt5djqw.mongodb.net/ZooSmart', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   autoIndex: false
