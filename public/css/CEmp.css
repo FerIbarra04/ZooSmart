@@ -48,6 +48,12 @@ body, html {
     font-weight: 100;
     font-size: 30px;
 }
+.DateBirth{
+    text-align: center;
+    font-family: "Bree Serif", serif; 
+    font-weight: 100;
+    font-size: 23px;
+}
 .input-dateAdd {
     width: 350px;
     text-align: center;

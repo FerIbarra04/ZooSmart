@@ -98,7 +98,7 @@ header{
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    margin: -150px 500px 0px 100px;
+    margin: -80px 500px 0px 100px;
 }
 .animal{
     font-family: "Bree Serif", serif; 

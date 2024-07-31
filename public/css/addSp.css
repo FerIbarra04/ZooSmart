@@ -26,12 +26,22 @@ body, html {
     padding: 1rem 0;
     z-index: 9999; /* Coloca el encabezado en la capa superior */
 }
+.containHea{
+  display: flex;
+  align-items: center;
+}
 
-.header h1 {
+.flecha{  
+  margin-left: 25px;
+}
+
+.containHea h1{
     font-family: "Bree Serif", serif; 
     font-weight: 100;
     font-size: 45px;
     color: white;
+    text-align: center;
+    margin-left: 550px;
 }
 
 .header hr {
