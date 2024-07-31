@@ -10,7 +10,7 @@ const adminRoutes = require('./routes/adminRoutes');
 const zooRoutes = require('./routes/ZooRoutes');
 const empleadoRoutes = require('./routes/empleadoRoutes');
 const animalRoutes = require('./routes/animalRoutes');
-const testRoutes = require('./routes/testRoutes'); //pruebas api
+const testRoutes = require('./routes/testRoutes'); //pruebas API
 
 const app = express();
 const port = 3000;  
