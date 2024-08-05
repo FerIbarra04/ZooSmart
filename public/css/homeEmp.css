@@ -78,6 +78,15 @@ h1{
   color: white;
 }
 
+.msj{
+  position: relative; /* Agrega esta propiedad */
+  font-family: "Bree Serif", serif;
+  font-size: 35px;
+  font-weight: 100;
+  color: white;
+  text-align: center;
+}
+
 
 /*CONTENEDOR DE LA INFORMACION DE LA ESPECIE*/
 .container-species{

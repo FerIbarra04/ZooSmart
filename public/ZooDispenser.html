@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZooDispenser</title>
+    <link rel="stylesheet" href="css/aquaticIOT.css">
+</head>
+<body>
+    <div class="form-container">
+        <h2 class="title-contain">Control Boxx</h2>
+        <p class="txt" id="waterLevel"></p>
+        <h1 class="subtitle">ZooDispenser</h1>
+        <form id="configForm">
+            <div class="form-group">
+                <div class="Specie">
+                    <label class="txt" for="specie">Specie</label>
+                    <input type="text" id="specie" name="specie" required>
+                </div>
+                <div class="form-group">
+                    <label class="txt" for="feeding-time">Feeding Time:</label>
+                    <input type="time" id="feeding-time" name="feeding-time" required>
+                </div>
+                <div class="form-group">
+                    <button type="button" onclick="validateForm()">Send</button>
+                </div>
+                <div class="form-group">
+                    <button type="button" onclick="goBack()">Go Back</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- Modal -->
+    <div id="errorModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close" onclick="closeModal()">&times;</span>
+                <h2>Configuration Error!</h2>
+            </div>
+            <div class="modal-body" id="modalMessage">
+                <!-- Error message will be inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function validateForm() {
+            const specie = document.getElementById('specie').value;
+            const feedingTime = document.getElementById('feeding-time').value;
+
+            if (specie === '' || feedingTime === '') {
+                document.getElementById('modalMessage').innerText = 'Error: Please fill out all fields.';
+                document.getElementById('errorModal').style.display = 'block';
+                return;
+            }
+
+            // Simulate successful data sent alert
+            alert("Data sent successfully");
+        }
+
+        function closeModal() {
+            document.getElementById('errorModal').style.display = 'none';
+        }
+
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+</body>
+</html>
+

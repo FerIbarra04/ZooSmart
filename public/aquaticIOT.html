@@ -33,6 +33,10 @@
             <div class="form-group">
                 <button type="button" onclick="validateForm()">Send</button>
             </div>
+
+            <div class="form-group">
+                <button type="button" class="back-button" onclick="goBack()">Go Back</button>
+            </div>
         </form>
     </div>
 
@@ -67,6 +71,10 @@
 
         function closeModal() {
             document.getElementById('errorModal').style.display = 'none';
+        }
+
+        function goBack() {
+            window.history.back();
         }
     </script>
 </body>
