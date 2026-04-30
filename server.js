@@ -30,7 +30,7 @@ app.use(session({
 }));
 
 // Conecta a la base de datos MongoDB
-mongoose.connect('mongodb+srv://Valeriaadr:vale123@cluster0.mt5djqw.mongodb.net/ZooSmart', {
+mongoose.connect('mongodb+srv://L_Fernanda:Fer12345@cluster0.7kpofgl.mongodb.net/ZooSmart?retryWrites=true&w=majority', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   autoIndex: false
